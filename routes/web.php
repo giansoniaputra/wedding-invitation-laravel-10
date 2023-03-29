@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\MempelaiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,17 @@ Route::get('/home', function () {
 Route::resource('/users', UserController::class)->middleware('auth');
     // Datatables
 Route::get('/dataTables', [UserController::class, 'dataTables'])->middleware('auth');
-    // Ambil Data User 
+// Ambil Data User 
 Route::get('/editUser', [UserController::class, 'editUser'])->middleware('auth');
 
 // LOGIN
-    // login
+// login
 Route::get('/auth', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/auth', [LoginController::class,'authenticate']);
+
+// MEMPELAI
+Route::resource('/mempelai', MempelaiController::class)->middleware('auth');
+    // Datatables
+Route::get('/dataTablesMempelai', [MempelaiController::class, 'dataTables'])->middleware('auth');
+    //Create Slug
+Route::get('createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
