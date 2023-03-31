@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invited;
 use App\Models\Mempelai;
 use App\Models\Template;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 use Cviebrock\EloquentSluggable\Services\SlugService;
@@ -54,6 +56,9 @@ class MempelaiController extends Controller
                 'nama_pria' => $request->nama_pria,
                 'nama_wanita' => $request->nama_wanita,
                 'template_id' => $request->template,
+                'slug' => $request->slug,
+                'activation' => 0,
+                'user_id' => auth()->user()->id,
             ];
 
             Mempelai::create($data);
@@ -74,7 +79,19 @@ class MempelaiController extends Controller
      */
     public function edit(Mempelai $mempelai)
     {
-        //
+        $p = explode(" ", $mempelai->nama_pria);
+        $w = explode(" ", $mempelai->nama_wanita);
+        $pria = $p[0];
+        $wanita = $w[0];
+        $data = [
+            'title' => 'Mempelai | Gian Wedding',
+            'badge' => 'Data Mempelai '.$pria.' dan '.$wanita,
+            'data' => $mempelai,
+            'templates' => Template::all(),
+            'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
+        ];
+
+       return view('mempelai.edit',$data);
     }
 
     /**
@@ -93,32 +110,229 @@ class MempelaiController extends Controller
         //
     }
 
+    public function updateDataMempelai(Request $request)
+    {
+        $rules = [
+            'nama_pria' =>   'required',
+            'nama_wanita' => 'required',
+            'ibu_pria' => 'required',
+            'bapak_pria' => 'required',
+            'ibu_wanita' => 'required',
+            'bapak_wanita' => 'required',
+        ];
+        $pesan = [
+            'nama_pria.required' => 'Tidak Boleh Kosong!',
+            'nama_wanita.required' => 'Tidak Boleh Kosong!',
+            'ibu_pria.required' => 'Tidak Boleh Kosong!.',
+            'bapak_pria.required' => 'Tidak Boleh Kosong!.',
+            'ibu_wanita.required' => 'Tidak Boleh Kosong!',
+            'bapak_wanita.required' => 'Tidak Boleh Kosong!',
+        ];
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // Jika validasi gagal, mengembalikan
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'nama_pria' =>   $request->nama_pria,
+                'nama_wanita' => $request->nama_wanita,
+                'slug' => $request->slug,
+                'ibu_pria' => $request->ibu_pria,
+                'bapak_pria' => $request->bapak_pria,
+                'ibu_wanita' => $request->ibu_wanita,
+                'bapak_wanita' => $request->bapak_wanita,
+            ];
+
+            Mempelai::where('id', $request->id)->update($data);
+            return response()->json(['success' => $data]);
+        }
+    }
+    public function updateAkadMempelai(Request $request)
+    {
+        $rules = [
+            'tanggal_akad' =>   'required',
+            'alamat_akad' => 'required',
+            'map_akad' => 'required',
+            'tanggal_resepsi' => 'required',
+            'alamat_resepsi' => 'required',
+            'map_resepsi' => 'required',
+            'waktu_akad' => 'required',
+            'waktu_resepsi' => 'required',
+            'link_akad' => 'required',
+            'link_resepsi' => 'required',
+        ];
+        $pesan = [
+            'tanggal_akad.required' => 'Tidak Boleh Kosong!',
+            'alamat_akad.required' => 'Tidak Boleh Kosong!',
+            'map_akad.required' => 'Tidak Boleh Kosong!.',
+            'tanggal_resepsi.required' => 'Tidak Boleh Kosong!.',
+            'alamat_resepsi.required' => 'Tidak Boleh Kosong!',
+            'map_resepsi.required' => 'Tidak Boleh Kosong!',
+            'waktu_akad.required' => 'Tidak Boleh Kosong!',
+            'waktu_resepsi.required' => 'Tidak Boleh Kosong!',
+            'link_akad.required' => 'Tidak Boleh Kosong!',
+            'link_resepsi.required' => 'Tidak Boleh Kosong!',
+        ];
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // Jika validasi gagal, mengembalikan
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'tanggal_akad' =>   $request->tanggal_akad,
+                'alamat_akad' => $request->alamat_akad,
+                'map_akad' => $request->map_akad,
+                'tanggal_resepsi' => $request->tanggal_resepsi,
+                'alamat_resepsi' => $request->alamat_resepsi,
+                'map_resepsi' => $request->map_resepsi,
+                'link_akad' => $request->link_akad,
+                'link_resepsi' => $request->link_resepsi,
+                'waktu_akad' => $request->waktu_akad,
+                'waktu_resepsi' => $request->waktu_resepsi,
+            ];
+
+            Mempelai::where('id', $request->id)->update($data);
+            return response()->json(['success' => $data]);
+        }
+    }
+
+    public function updateInviteMempelai(Request $request)
+    {
+        $rules = [
+            'invited' => 'required'
+        ];
+        $pesan = [
+            'invited.required' => 'Tidak Boleh Kosong!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // Jika validasi gagal, mengembalikan
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'mempelai_id' => $request->id,
+                'invited' => $request->invited,
+            ];
+
+            Invited::create($data);
+            return response()->json(['success' => $data]);
+        }
+    }
+
     public function cekSlug(Request $request)
     {
-        $slug = SlugService::createSlug(Mempelai::class, 'slug', $request->title ,['unique' => true]);
+        $slug = SlugService::createSlug(Mempelai::class, 'slug', $request->title);
         return response()->json(['slug' => $slug]);
     }
 
     public function dataTables(Request $request)
     {
         if ($request->ajax()) {
-            $query = Mempelai::select('*');
-            $data = $query->get();
+            if(auth()->user()->roles == 'admin') {
+                $query = DB::table('mempelai as a')->join('users as b', 'a.user_id', '=', 'b.id')->select('a.*','b.name');
+                $data = $query->get();
 
-            foreach ($data as $row){
-                $row->pria = ucwords(strtolower($row->nama_pria));
-                $row->wanita = ucwords(strtolower($row->nama_wanita));
+                foreach ($data as $row){
+                    $row->pria = ucwords(strtolower($row->nama_pria));
+                    $row->wanita = ucwords(strtolower($row->nama_wanita));
+                }
+            
+                return DataTables::of($data)->addColumn('action', function($row){
+                    $actionBtn = 
+                    '<button class="btn btn-info btn-sm view-button" data-id="'.$row->id.'"><i class="fas fa-eye"></i></button>
+                    <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
+                        <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
+                    </form>';
+                    return $actionBtn;
+                })->make(true);
+            } else if(auth()->user()->roles == 'reseller'){
+                $query = DB::table('mempelai as a')->join('users as b', 'a.user_id', '=', 'b.id')->select('a.*','b.name')->where('user_id', auth()->user()->id);
+                $data = $query->get();
+
+                foreach ($data as $row){
+                    $row->pria = ucwords(strtolower($row->nama_pria));
+                    $row->wanita = ucwords(strtolower($row->nama_wanita));
+                }
+            
+                return DataTables::of($data)->addColumn('action', function($row){
+                    $actionBtn = 
+                    '<button class="btn btn-info btn-sm view-button" data-id="'.$row->id.'"><i class="fas fa-eye"></i></button>
+                    <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
+                        <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
+                    </form>';
+                    return $actionBtn;
+                })->make(true);
             }
-    
-            return DataTables::of($data)->addColumn('action', function($row){
-                $actionBtn = 
-                '<button class="btn btn-info btn-sm view-button" data-id="'.$row->id.'"><i class="fas fa-eye"></i></button>
-                <button class="btn btn-warning btn-sm edit-button" data-id="'.$row->id.'"><i class="fas fa-edit"></i></button>
-                <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
-                    <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
-                </form>';
-                return $actionBtn;
-            })->make(true);
+        }
+    }
+
+    public function editInvited(Request $request)
+    {
+        $invited = Invited::where('id', $request->id)->first();
+
+        $data = [
+            'id' => $invited->id,
+            'invited' => $invited->invited,
+        ];
+
+        return response()->json(['invited' => $data]);
+    }
+
+    public function updateInvited(Request $request)
+    {
+        $rules = [
+            'invited' => 'required'
+        ];
+        $pesan = [
+            'invited.required' => 'Tidak Boleh Kosong!'
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // Jika validasi gagal, mengembalikan
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'invited' => $request->invited,
+            ];
+
+            Invited::where('id', $request->id)->update($data);
+            return response()->json(['success' => 'Data Tamu Berhasil Diupdate']);
+        }
+    }
+
+    public function destroyInvited(Request $request)
+    {
+        Invited::destroy($request->id);
+        return response()->json(['success' => 'Data Tamu Berhasil Dihapus!']);
+    }
+
+    public function doneProses()
+    {
+        return redirect('/mempelai')->with('success', 'Data Mempelai Berhasil Diupdate');
+    }
+
+    public function dataTablesInvited(Request $request)
+    {
+        if ($request->ajax()) {
+                $query = Invited::where('mempelai_id', $request->id)->select('*');
+                $data = $query->get();
+
+                foreach ($data as $row){
+                    $row->terundang = ucwords(strtolower($row->invited));
+                }
+            
+                return DataTables::of($data)->addColumn('action', function($row){
+                    $actionBtn = 
+                    '<button class="btn btn-warning btn-sm edit-invited-button" data-id="'.$row->id.'"><i class="fas fa-edit"></i></button>
+                    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
+                        <button type="button" class="btn btn-danger btn-sm delete-invited-button" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
+                    </form>';
+                    return $actionBtn;
+                })->make(true);
         }
     }
 }

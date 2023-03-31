@@ -1,5 +1,6 @@
 @extends('layouts.main')
 @section('container')
+<div id="success-update" data-flash="{{ session('success') }}"></div>
 <div class="row mb-2">
     <div class="col">
         <button type="button" id="btn-tambah" class="btn btn-primary btn-icon-split" data-toggle="modal"
@@ -25,6 +26,7 @@
                                 <th>No</th>
                                 <th>Nama Pria</th>
                                 <th>Nama Wanita</th>
+                                <th>Nama Reseller</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

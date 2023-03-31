@@ -43,10 +43,24 @@ Route::get('/editUser', [UserController::class, 'editUser'])->middleware('auth')
 // login
 Route::get('/auth', [LoginController::class,'index'])->name('login')->middleware('guest');
 Route::post('/auth', [LoginController::class,'authenticate']);
+Route::get('/auth/logout', [LoginController::class,'logout'])->middleware('auth');
 
 // MEMPELAI
 Route::resource('/mempelai', MempelaiController::class)->middleware('auth');
     // Datatables
 Route::get('/dataTablesMempelai', [MempelaiController::class, 'dataTables'])->middleware('auth');
+Route::get('/dataTablesInvited', [MempelaiController::class, 'dataTablesInvited'])->middleware('auth');
     //Create Slug
-Route::get('createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
+Route::get('/createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
+    //Update Data Mempelai
+Route::post('/dataMempelai', [MempelaiController::class,'updateDataMempelai'])->middleware('auth');
+    //Update Akad Mempelai
+Route::post('/akadMempelai', [MempelaiController::class,'updateAkadMempelai'])->middleware('auth');
+    //Update Tamu Undangan
+Route::post('/inviteMempelai', [MempelaiController::class,'updateInviteMempelai'])->middleware('auth');
+    // Ambil Data Tamu Undangan
+Route::get('/editInvited', [MempelaiController::class, 'editInvited'])->middleware('auth');
+Route::post('/updateInvited', [MempelaiController::class, 'updateInvited'])->middleware('auth');
+    // Hapus Tamu Undangan
+Route::post('/deleteInvited', [MempelaiController::class, 'destroyInvited'])->middleware('auth');
+Route::get('/doneProses', [MempelaiController::class, 'doneProses'])->middleware('auth');

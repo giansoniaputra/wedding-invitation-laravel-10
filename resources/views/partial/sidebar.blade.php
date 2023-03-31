@@ -37,7 +37,9 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Master Data:</h6>
+                @if (auth()->user()->roles == 'admin')
                 <a class="collapse-item" href="/users">Tambah Users</a>
+                @endif
                 <a class="collapse-item" href="/mempelai">Tambah Mempelai</a>
             </div>
         </div>

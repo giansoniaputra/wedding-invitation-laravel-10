@@ -134,9 +134,9 @@ class UserController extends Controller
                 'username.required' => 'Username Tidak Boleh Kosong!',
                 'username.unique' => 'Username Sudah Terdaftar. Silahkan Masukan Username Lain!.',
                 'username.min' => 'Username Harus Mempunyai Minimal 8 Karakter!',
-                'password|required' => 'Password Tidak Boleh Kosong!.',
-                'password|min' => 'Password Harus Mempunyai Minimal 8 Karakter!.',
-                'password|confirmed' => 'Password Yang Sama!.',
+                'password.required' => 'Password Tidak Boleh Kosong!.',
+                'password.min' => 'Password Harus Mempunyai Minimal 8 Karakter!.',
+                'password.confirmed' => 'Password Yang Sama!.',
                 'password_confirmation|required' => 'Konfirmasi Password Tidak Boleh Kosong!.',
                 'email.required' => 'Email Tidak Boleh Kosong!',
                 'email.email' => 'Email Harus Berupa Email (contoh: namalengkap@gmail.com)',
@@ -158,7 +158,7 @@ class UserController extends Controller
             ];
 
             Users::where('id', $request->id)->update($data);
-            return response()->json(['success' => 'Data User Berhasil Diupdate!']);
+            return response()->json(['success' => 'Data Mempelai Berhasil Diupdate!']);
         }
     }
 

@@ -25,6 +25,9 @@ $(document).ready(function () {
                 "data": "wanita"
             },
             {
+                "data": "name"
+            },
+            {
                 "data": "action",
                 "orderable": true,
                 "searchable": true
@@ -115,7 +118,7 @@ $(document).ready(function () {
                 title: title,
                 _token: token
             },
-            url: "createSlug",
+            url: "/createSlug",
             type: "GET",
             dataType: 'json',
             success: function (data) {
@@ -151,5 +154,15 @@ $(document).ready(function () {
                 selectElement.after(feedbackElement);
             }
         });
+    }
+
+    //Flash Message
+    const flashData = $('#success-update').data('flash');
+    if (flashData) {
+        Swal.fire(
+            'Good job!',
+            flashData,
+            'success'
+          )
     }
 })
