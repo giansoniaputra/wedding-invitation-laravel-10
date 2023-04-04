@@ -11,7 +11,7 @@ $(document).ready(function () {
         "ajax": {
             url: '/dataTablesInvited',
             type: 'GET',
-            data: function ( d ) {
+            data: function (d) {
                 d.id = $("#id_mempelai").val();
             }
         },
@@ -45,57 +45,57 @@ $(document).ready(function () {
     let gallery_card = $("#gallery-card")
     let other_card = $("#other-card")
     // Reset Data
-    $("#invited").on('click', function(){
+    $("#invited").on('click', function () {
         $("#invited").removeClass("is-invalid")
     })
-    $("#nama_pria").on("click", function(){
+    $("#nama_pria").on("click", function () {
         $("#nama_pria").removeClass("is-invalid")
     })
-    $("#nama_wanita").on("click", function(){
+    $("#nama_wanita").on("click", function () {
         $("#nama_wanita").removeClass("is-invalid")
     })
-    $("#ibu_pria").on("click", function(){
+    $("#ibu_pria").on("click", function () {
         $("#ibu_pria").removeClass("is-invalid")
     })
-    $("#bapak_pria").on("click", function(){
+    $("#bapak_pria").on("click", function () {
         $("#bapak_pria").removeClass("is-invalid")
     })
-    $("#ibu_wanita").on("click", function(){
+    $("#ibu_wanita").on("click", function () {
         $("#ibu_wanita").removeClass("is-invalid")
     })
-    $("#bapak_wanita").on("click", function(){
+    $("#bapak_wanita").on("click", function () {
         $("#bapak_wanita").removeClass("is-invalid")
     })
 
     //Reset Akad
-    $("#tanggal_akad").on("click", function(){
+    $("#tanggal_akad").on("click", function () {
         $("#tanggal_akad").removeClass("is-invalid")
     })
-    $("#alamat_akad").on("click", function(){
+    $("#alamat_akad").on("click", function () {
         $("#alamat_akad").removeClass("is-invalid")
     })
-    $("#map_akad").on("click", function(){
+    $("#map_akad").on("click", function () {
         $("#map_akad").removeClass("is-invalid")
     })
-    $("#tanggal_resepsi").on("click", function(){
+    $("#tanggal_resepsi").on("click", function () {
         $("#tanggal_resepsi").removeClass("is-invalid")
     })
-    $("#alamat_resepsi").on("click", function(){
+    $("#alamat_resepsi").on("click", function () {
         $("#alamat_resepsi").removeClass("is-invalid")
     })
-    $("#map_resepsi").on("click", function(){
+    $("#map_resepsi").on("click", function () {
         $("#map_resepsi").removeClass("is-invalid")
     })
-    $("#waktu_akad").on("click", function(){
+    $("#waktu_akad").on("click", function () {
         $("#waktu_akad").removeClass("is-invalid")
     })
-    $("#waktu_resepsi").on("click", function(){
+    $("#waktu_resepsi").on("click", function () {
         $("#waktu_resepsi").removeClass("is-invalid")
     })
-    $("#link_akad").on("click", function(){
+    $("#link_akad").on("click", function () {
         $("#link_akad").removeClass("is-invalid")
     })
-    $("#link_resepsi").on("click", function(){
+    $("#link_resepsi").on("click", function () {
         $("#link_resepsi").removeClass("is-invalid")
     })
 
@@ -161,7 +161,7 @@ $(document).ready(function () {
         akad.addClass("text-info")
     })
 
-    $("#btn-back-1").on("click", function(){
+    $("#btn-back-1").on("click", function () {
         akad_card.addClass("d-none")
         gallery_card.addClass("d-none")
         other_card.addClass("d-none")
@@ -176,7 +176,7 @@ $(document).ready(function () {
         other.removeClass("text-white")
         other.addClass("text-info")
     })
-    $("#btn-back-3").on("click", function(){
+    $("#btn-back-3").on("click", function () {
         gallery_card.removeClass("d-none")
         akad_card.addClass("d-none")
         data_card.addClass("d-none")
@@ -371,8 +371,7 @@ $(document).ready(function () {
                 if (response.errors) {
                     //Jika ada pesan error, tampilkan pesan error pada form
                     displayErrors(response.errors);
-                } 
-                else {
+                } else {
                     // Jika tidak ada pesan error, tampilkan pesan sukses pada form
                     // console.log(response);
                     $('#modal-invited').modal('hide');
@@ -383,7 +382,7 @@ $(document).ready(function () {
                         title: response.success,
                         showConfirmButton: false,
                         timer: 1000
-                      })
+                    })
                 }
             },
             error: function (xhr) {
@@ -425,12 +424,98 @@ $(document).ready(function () {
                             title: data.success,
                             showConfirmButton: false,
                             timer: 1000
-                          })
+                        })
                     }
                 })
             }
         })
     });
+
+    $("#save-photo").on('click', function () {
+        var formdata = $("#gallery-card form").serializeArray();
+        var data = {};
+        $(formdata).each(function (index, obj) {
+            data[obj.name] = obj.value;
+        });
+        // console.log(formdata);
+        $.ajax({
+            data: $('#gallery-card form').serialize(),
+            url: "/uploadPhoto",
+            type: "POST",
+            dataType: 'json',
+            success: function (response) {
+                // console.log(response);
+                if (response.errors) {
+                    //Jika ada pesan error, tampilkan pesan error pada form
+                    displayErrors(response.errors);
+                } else {
+                    // Jika tidak ada pesan error, tampilkan pesan sukses pada form
+                    // console.log(response.success.mempelai_id);
+                    $.ajax({
+                        url: '/load-content',
+                        data: {
+                            id: response.success.mempelai_id
+                        },
+                        success: function (data) {
+                            $('#refresh-gallery').html(data);
+                        }
+                    });
+                    // $('#modal-invited').modal('hide');
+                    // table.ajax.reload()
+                    // Swal.fire({
+                    //     position: 'top-end',
+                    //     icon: 'success',
+                    //     title: response.success,
+                    //     showConfirmButton: false,
+                    //     timer: 1000
+                    //   })
+                }
+            },
+            error: function (xhr) {
+                var errors = xhr.responseJSON.errors;
+                displayErrors(errors);
+            }
+        })
+    })
+
+    $("#photo").on('click', function () {
+        $("#base64img").removeClass("is-invalid");
+    })
+
+    $("#refresh-gallery").on('click', '.btn-hapus-foto', function () {
+        let id = $(this).attr('data-id');
+        let mempelai_id = $(this).attr('data-mempelai_id');
+        $.ajax({
+            data: {
+                id: id,
+                mempelai_id: mempelai_id
+            },
+            url: "/deletePhoto",
+            type: "GET",
+            dataType: 'json',
+            success: function (response) {
+                // console.log(response);
+                if (response.errors) {
+                    //Jika ada pesan error, tampilkan pesan error pada form
+                    // displayErrors(response.errors);
+                } else {
+                    $.ajax({
+                        url: '/load-content',
+                        data: {
+                            id: response.success.mempelai_id
+                        },
+                        success: function (data) {
+                            $('#refresh-gallery').html(data);
+                        }
+                    });
+                }
+            },
+            error: function (xhr) {
+                var errors = xhr.responseJSON.errors;
+                displayErrors(errors);
+            }
+        })
+    })
 
 
     function displayErrors(errors) {

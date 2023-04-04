@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Photo;
 use App\Models\Invited;
 use App\Models\Mempelai;
 use App\Models\Template;
@@ -89,6 +90,7 @@ class MempelaiController extends Controller
             'data' => $mempelai,
             'templates' => Template::all(),
             'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
+            'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
         ];
 
        return view('mempelai.edit',$data);
@@ -115,6 +117,8 @@ class MempelaiController extends Controller
         $rules = [
             'nama_pria' =>   'required',
             'nama_wanita' => 'required',
+            'fotoPria' => 'required',
+            'fotoWanita' => 'required',
             'ibu_pria' => 'required',
             'bapak_pria' => 'required',
             'ibu_wanita' => 'required',
@@ -123,6 +127,8 @@ class MempelaiController extends Controller
         $pesan = [
             'nama_pria.required' => 'Tidak Boleh Kosong!',
             'nama_wanita.required' => 'Tidak Boleh Kosong!',
+            'fotoPria.required' => 'Tidak Boleh Kosong!',
+            'fotoWanita.required' => 'Tidak Boleh Kosong!',
             'ibu_pria.required' => 'Tidak Boleh Kosong!.',
             'bapak_pria.required' => 'Tidak Boleh Kosong!.',
             'ibu_wanita.required' => 'Tidak Boleh Kosong!',
@@ -141,6 +147,8 @@ class MempelaiController extends Controller
                 'bapak_pria' => $request->bapak_pria,
                 'ibu_wanita' => $request->ibu_wanita,
                 'bapak_wanita' => $request->bapak_wanita,
+                'photo_pria' => $request->fotoPria,
+                'photo_wanita' => $request->fotoWanita,
             ];
 
             Mempelai::where('id', $request->id)->update($data);
@@ -269,6 +277,30 @@ class MempelaiController extends Controller
         }
     }
 
+    public function uploadPhoto(Request $request)
+    {
+        $rules = [
+            'base64img' => 'required',
+        ];
+        $pesan = [
+            'base64img.required' => 'Tidak Boleh Kosong!',
+        ];
+
+        $validator = Validator::make($request->all(), $rules, $pesan);
+        if ($validator->fails()) {
+            // Jika validasi gagal, mengembalikan
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'mempelai_id' => $request->id,
+                'photo' => $request->base64img,
+            ];
+
+            Photo::create($data);
+            return response()->json(['success' => $data]);
+        }
+    }
+
     public function editInvited(Request $request)
     {
         $invited = Invited::where('id', $request->id)->first();
@@ -313,6 +345,43 @@ class MempelaiController extends Controller
     public function doneProses()
     {
         return redirect('/mempelai')->with('success', 'Data Mempelai Berhasil Diupdate');
+    }
+
+    public function reloadGallery(Request $request)
+    {
+        $photos = Photo::where('mempelai_id', $request->id)->get();
+        echo '
+        <div class="col">
+        <div class="card m-4">
+            <h1 class="h1 text-center">Gallery</h1>
+            <hr>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-12">
+                        ';
+                        foreach ($photos as $photo) {
+                            echo '
+                                    <img width="200px" class="img-fluid" src="'.$photo->photo.'" alt="gallery">
+                                    <button type="button" class="btn btn-danger btn-sm btn-hapus-foto" data-id="'.$photo->id.'" data-mempelai_id="'. $photo->mempelai_id .'"><i class="fas fa-trash"></i></button>
+                                ';
+                            }
+                            echo '
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            ';
+    }
+
+    public function deletePhoto(Request $request)
+    {
+        $data = [
+            'id' => $request->id,
+            'mempelai_id' => $request->mempelai_id,
+        ];
+        Photo::destroy($request->id);
+        return response()->json(['success' => $data]);
     }
 
     public function dataTablesInvited(Request $request)
