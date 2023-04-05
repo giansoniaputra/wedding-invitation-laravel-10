@@ -52,21 +52,23 @@ Route::get('/dataTablesMempelai', [MempelaiController::class, 'dataTables'])->mi
 Route::get('/dataTablesInvited', [MempelaiController::class, 'dataTablesInvited'])->middleware('auth');
     //Create Slug
 Route::get('/createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
-    //Update Data Mempelai
-Route::post('/dataMempelai', [MempelaiController::class,'updateDataMempelai'])->middleware('auth');
-    //Update Tamu Undangan
-Route::post('/inviteMempelai', [MempelaiController::class,'updateInviteMempelai'])->middleware('auth');
-    // Ambil Data Tamu Undangan
-Route::get('/editInvited', [MempelaiController::class, 'editInvited'])->middleware('auth');
-Route::post('/updateInvited', [MempelaiController::class, 'updateInvited'])->middleware('auth');
-    // Hapus Tamu Undangan
-Route::post('/deleteInvited', [MempelaiController::class, 'destroyInvited'])->middleware('auth');
-Route::get('/doneProses', [MempelaiController::class, 'doneProses'])->middleware('auth');
-    // Upload Photo
-Route::post('/uploadPhoto', [MempelaiController::class, 'uploadPhoto'])->middleware('auth');
-Route::get('/deletePhoto', [MempelaiController::class, 'deletePhoto'])->middleware('auth');
-    // LOAD SEBAGIAN HALAMAN
-Route::get('/load-content',[MempelaiController::class, 'reloadGallery'])->middleware('auth');
+//     //Update Data Mempelai
+// Route::post('/dataMempelai', [MempelaiController::class,'updateDataMempelai'])->middleware('auth');
+//     //Update Tamu Undangan
+// Route::post('/inviteMempelai', [MempelaiController::class,'updateInviteMempelai'])->middleware('auth');
+//     // Ambil Data Tamu Undangan
+// Route::get('/editInvited', [MempelaiController::class, 'editInvited'])->middleware('auth');
+// Route::post('/updateInvited', [MempelaiController::class, 'updateInvited'])->middleware('auth');
+//     // Hapus Tamu Undangan
+// Route::post('/deleteInvited', [MempelaiController::class, 'destroyInvited'])->middleware('auth');
+// Route::get('/doneProses', [MempelaiController::class, 'doneProses'])->middleware('auth');
+//     // Upload Photo
+// Route::post('/uploadPhoto', [MempelaiController::class, 'uploadPhoto'])->middleware('auth');
+// Route::get('/deletePhoto', [MempelaiController::class, 'deletePhoto'])->middleware('auth');
+//     // LOAD SEBAGIAN HALAMAN
+// Route::get('/load-content',[MempelaiController::class, 'reloadGallery'])->middleware('auth');
+Route::post('/mempelai/update-data',[MempelaiController::class,'updateData'])->middleware('auth');
+Route::get('/update-photo',[MempelaiController::class,'updateDataPhoto'])->middleware('auth');
     // MENAMPILKAN FRONT END (harus paling bawah)
 Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
 

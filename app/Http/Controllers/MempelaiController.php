@@ -90,11 +90,10 @@ class MempelaiController extends Controller
             'badge' => 'Data Mempelai '.$pria.' dan '.$wanita,
             'data' => $mempelai,
             'templates' => Template::all(),
-            'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
             'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
         ];
 
-       return view('mempelai.edit',$data);
+       return view('mempelai.update-data',$data);
     }
 
     /**
@@ -103,6 +102,59 @@ class MempelaiController extends Controller
     public function update(Request $request, Mempelai $mempelai)
     {
         //
+    }
+
+    public function updateData(Request $request)
+    {
+        $rules = [
+            'nama_pria' =>   'required',
+            'nama_wanita' => 'required',
+            'ibu_pria' => 'required',
+            'bapak_pria' => 'required',
+            'ibu_wanita' => 'required',
+            'bapak_wanita' => 'required',
+        ];
+        $pesan = [
+            'nama_pria.required' => 'Tidak Boleh Kosong!',
+            'nama_wanita.required' => 'Tidak Boleh Kosong!',
+            'ibu_pria.required' => 'Tidak Boleh Kosong!.',
+            'bapak_pria.required' => 'Tidak Boleh Kosong!.',
+            'ibu_wanita.required' => 'Tidak Boleh Kosong!',
+            'bapak_wanita.required' => 'Tidak Boleh Kosong!',
+        ];
+        $validateData = $request->validate($rules, $pesan);
+
+        Mempelai::where('id', $request->id)->update($validateData);
+
+        $p = explode(" ", $request->nama_pria);
+        $w = explode(" ", $request->nama_wanita);
+        $pria = $p[0];
+        $wanita = $w[0];
+        $data = [
+            'title' => 'Mempelai | Gian Wedding',
+            'badge' => 'Data Mempelai '.$pria.' dan '.$wanita,
+            'data' => Mempelai::where('id', $request->id)->first(),
+        ];
+        return view('mempelai.update-photo', $data);
+    }
+
+    public function updateDataPhoto(Request $request)
+    {
+    //     return $request;
+    //     $p = explode(" ", $mempelai->nama_pria);
+    //     $w = explode(" ", $mempelai->nama_wanita);
+    //     $pria = $p[0];
+    //     $wanita = $w[0];
+    //     $data = [
+    //         'title' => 'Mempelai | Gian Wedding',
+    //         'badge' => 'Data Mempelai '.$pria.' dan '.$wanita,
+    //         'data' => $mempelai,
+    //         'templates' => Template::all(),
+    //         'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
+    //         'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
+    //     ];
+
+    //    return view('mempelai.update-photo',$data);
     }
 
     /**
