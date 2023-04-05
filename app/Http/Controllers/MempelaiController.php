@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use App\Models\Ucapan;
 use App\Models\Invited;
 use App\Models\Mempelai;
 use App\Models\Template;
@@ -248,7 +249,7 @@ class MempelaiController extends Controller
             
                 return DataTables::of($data)->addColumn('action', function($row){
                     $actionBtn = 
-                    '<button class="btn btn-info btn-sm view-button" data-id="'.$row->id.'"><i class="fas fa-eye"></i></button>
+                    '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
                     <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
                         <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
@@ -266,7 +267,7 @@ class MempelaiController extends Controller
             
                 return DataTables::of($data)->addColumn('action', function($row){
                     $actionBtn = 
-                    '<button class="btn btn-info btn-sm view-button" data-id="'.$row->id.'"><i class="fas fa-eye"></i></button>
+                    '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
                     <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
                         <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
@@ -402,6 +403,49 @@ class MempelaiController extends Controller
                     </form>';
                     return $actionBtn;
                 })->make(true);
+        }
+    }
+
+
+    // FRONT END
+    public function front_end(Mempelai $mempelai)
+    {
+        $template = Template::where('id', $mempelai->template_id)->first();
+        $daftar_hari = array(
+            'Sunday' => 'Minggu',
+            'Monday' => 'Senin',
+            'Tuesday' => 'Selasa',
+            'Wednesday' => 'Rabu',
+            'Thursday' => 'Kamis',
+            'Friday' => 'Jumat',
+            'Saturday' => 'Sabtu'
+        );
+        $daftar_bulan = array(
+            'January' => 'Januari',
+            'February' => 'Februari',
+            'March' => 'Maret',
+            'April' => 'April',
+            'May' => 'Mei',
+            'June' => 'Juni',
+            'July' => 'Juli',
+            'August' => 'Agustus',
+            'September' => 'September',
+            'October' => 'Oktober',
+            'November' => 'November',
+            'December' => 'Desember'
+        );
+        if($mempelai->activation){
+            $data = [
+                'mempelai' => $mempelai,
+                'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
+                'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
+                'ucapan' => Ucapan::where('mempelai_id', $mempelai->id)->get(),
+                'hari' => $daftar_hari,
+                'bulan' => $daftar_bulan,
+            ];
+            return view('front-end.'.$template->template, $data);
+        } else {
+            return view('not-activeted');
         }
     }
 }

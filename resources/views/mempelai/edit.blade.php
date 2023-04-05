@@ -1,6 +1,21 @@
 @extends('layouts.main')
 @section('container')
-<nav aria-label="breadcrumb">
+<style>
+    #image {
+        display: block;
+        max-width: 100%;
+    }
+
+    .preview {
+        overflow: hidden;
+        width: 160px;
+        height: 160px;
+        margin: 10px;
+        border: 1px solid red
+    }
+
+</style>
+<nav>
     <ol class="breadcrumb bg-dark">
         <li class="breadcrumb-item"><a href="javascript:;" id="data" class="text-white">Data Mempelai</a></li>
         <li class="breadcrumb-item"><a href="javascript:;" id="akad" class="text-info">Akad dan Resepsi</a></li>
@@ -35,31 +50,13 @@
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
                     <label for="photo_pria" class="form-label">Foto Pria</label>
-                    <input type="file" class="form-control" name="photo_pria" id="photo_pria"
-                        onchange="photoPria(this)">
+                    <input type="file" class="form-control" name="photo_pria" id="photo_pria">
                     <input type="hidden" name="fotoPria" id="fotoPria" value="{{ $data->photo_pria }}">
                 </div>
             </div>
             <div class="row d-flex flex-column align-items-center text-center">
                 <img src="{{ $data->photo_pria }}" alt="" class="img-fluid show-foto-pria" width="200px">
             </div>
-            <script>
-                function photoPria(obj) {
-                    let reader = new FileReader();
-                    reader.readAsDataURL(obj.files[0]);
-                    reader.onload = function () {
-                        document.getElementById('fotoPria').value = reader.result;
-                    }
-
-                    const imgPre = document.querySelector('.show-foto-pria');
-                    const oFReader = new FileReader();
-                    oFReader.readAsDataURL(obj.files[0]);
-                    oFReader.onload = function (oFREvent) {
-                        imgPre.src = oFREvent.target.result;
-                    }
-                }
-
-            </script>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
                     <label for="photo_wanita" class="form-label">Foto Wanita</label>
@@ -71,23 +68,6 @@
             <div class="row d-flex flex-column align-items-center text-center" id="show-foto-wanita">
                 <img src="{{ $data->photo_wanita }}" alt="" class="img-fluid show-foto-wanita" width="200px">
             </div>
-            <script>
-                function photoWanita(obj) {
-                    let reader = new FileReader();
-                    reader.readAsDataURL(obj.files[0]);
-                    reader.onload = function () {
-                        document.getElementById('fotoWanita').value = reader.result;
-                    }
-
-                    const imgPre = document.querySelector('.show-foto-wanita');
-                    const oFReader = new FileReader();
-                    oFReader.readAsDataURL(obj.files[0]);
-                    oFReader.onload = function (oFREvent) {
-                        imgPre.src = oFREvent.target.result;
-                    }
-                }
-
-            </script>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -188,7 +168,8 @@
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label for="map_akad" class="form-label">Sematan Map Akad (Google Maps)</label>
-                        <textarea id="map_akad" class="form-control" name="map_akad">{{ $data->map_akad }}</textarea>
+                        <textarea id="map_akad" class="form-control" name="map_akad"
+                            style="height:400px">{{ $data->map_akad }}</textarea>
                     </div>
                 </div>
             </div>
@@ -231,8 +212,8 @@
                 <div class="col-sm-4">
                     <div class="mb-3">
                         <label for="map_resepsi" class="form-label">Sematan Map Resepsi (Google Maps)</label>
-                        <textarea id="map_resepsi" class="form-control"
-                            name="map_resepsi">{{ $data->map_resepsi }}</textarea>
+                        <textarea id="map_resepsi" class="form-control" name="map_resepsi"
+                            style="height:400px">{{ $data->map_resepsi }}</textarea>
                     </div>
                 </div>
             </div>
@@ -273,7 +254,7 @@
                 <div class="col-sm-12">
                     <div class="mb-3">
                         <label for="photo" class="form-label">Name</label>
-                        <input type="file" class="form-control" name="photo" id="photo" onchange="base64(this)">
+                        <input type="file" class="form-control" name="photo" id="photo">
                         <input type="hidden" id="base64img" name="base64img">
                     </div>
                     <button type="button" class="btn btn-success btn-icon-split ml-2" id="save-photo">
@@ -307,16 +288,6 @@
         </div>
     </form>
 </div>
-<script>
-    function base64(obj) {
-        let reader = new FileReader();
-        reader.readAsDataURL(obj.files[0]);
-        reader.onload = function () {
-            document.getElementById('base64img').value = reader.result;
-        }
-    }
-
-</script>
 <div class="card d-none" id="other-card">
     <div class="card-body">
         <form action="javascript:void(0)">
@@ -414,5 +385,32 @@
     </div>
 </div>
 
+<!-- Modal Cropper -->
+<div class="modal fade" id="modal-cropper" data-backdrop="static" data-keyboard="false" tabindex="-1"
+    aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Cropper</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col">
+                        <img id="image" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary crop_pria">Crop</button>
+                <button type="button" class="btn btn-primary crop_wanita">Crop</button>
+                <button type="button" class="btn btn-primary crop_gallery">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script src="/js/page-script/edit-mempelai.js"></script>
 @endsection

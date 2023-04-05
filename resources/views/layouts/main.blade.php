@@ -37,6 +37,10 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
 
+    {{-- CROPPER --}}
+    <link rel="stylesheet" href="/css/cropper.min.css">
+    <script src="/js/cropper.min.js"></script>
+
 </head>
 
 <body id="page-top">

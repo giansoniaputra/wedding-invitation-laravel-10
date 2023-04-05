@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Wedding</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/front-end/css/style2.css">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- FONT GOOGLE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Pacifico -->
+    <!-- font-family: 'Pacifico', cursive; -->
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <!-- Dencing -->
+    <!-- font-family: 'Dancing Script', cursive; -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+    <!-- Feather Icon -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+</head>
+
+<body class="bodyku">
+    <header>
+        <nav class="navbar rounded fixed-bottom mx-1 mb-1" style="background-color:rgba(0, 0, 0, 0.8)">
+            <div class="container">
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#"><i data-feather="home"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#mempelai"><i data-feather="book-open"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#waktu"><i data-feather="calendar"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#party"><i data-feather="gift"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#gallery"><i data-feather="aperture"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#doa"><i data-feather="mail"
+                        style="width:17px"></i></a>
+                <a class="btn btn-outline-light rounded py-1 px-2" href="#mengundang"><i data-feather="list"
+                        style="width:17px"></i></a>
+            </div>
+        </nav>
+    </header>
+    <section id="pinggiran">
+        <div id="atas" class="position-relative">
+            <img width="140px" src="/front-end/img/bunga-atas.png" alt=""
+                class="img-fluid position-fixed top-0 start-0 bunga-atas">
+        </div>
+        <div id="bawah" class="position-relative">
+            <img width="140px" src="/front-end/img/bunga-bawah.png" alt=""
+                class="img-fluid position-fixed bottom-0 end-0 bunga-bawah">
+        </div>
+    </section>
+    <main>
+        <section id="home" class="home">
+            <div class="container position-absolute top-50 start-50 translate-middle">
+                <div class="row">
+                    <div id="judul" class="col">
+                        <h2 class="fw-bold text-center"
+                            style="font-family: 'Pacifico', cursive; color: #3B486D; font-size : 5vmax;">The Wedding
+                        </h2>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="bunga" class="col d-flex justify-content-center align-items-center">
+                        <img src="/front-end/img/badge.png" class="img-fluid">
+                    </div>
+                    <div id="nama-mempelai" class="col position-absolute top-50 start-50 translate-middle pt-5">
+                        <h1 class="text-center" style="font-family: 'Dancing Script', cursive;">{{ ucwords(strtolower($mempelai->nama_pria)) }}
+                            <br> & <br> {{ ucwords(strtolower($mempelai->nama_wanita)) }}</h1>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mempelai">
+            <!-- Container -->
+            <div class="conteiner kartu m-2 " style="padding : 10px 10px; height: 90vh;">
+                <!-- Salam -->
+                <div class="row mb-3 pt-5">
+                    <div id="salam" class="col">
+                        <h1 class="fs-3 fw-bold text-center"
+                            style="font-family: 'Times New Roman', Times, serif; color: #3B486D;">
+                            Assalamualaikum
+                            Wr. Wb.</h1>
+                    </div>
+                </div>
+                <!-- Pembukaan -->
+                <div class="row">
+                    <div id="pembukaan" class="col">
+                        <p class="text-center mb-5 mx-1 tulisan fs-6"
+                            style="font-family: 'Times New Roman', Times, serif;">Dengan memohon rahmatdan ridho Allah
+                            Subhanahu Wa
+                            Ta’ala, insyaaAllah kami akan menyelenggarakan acara pernikahan :</p>
+                    </div>
+                </div>
+                <!-- Gambar -->
+                <div class="row text-center">
+                    <div id="img-pria" class="col-5">
+                        <img width="120px" src="{{ $mempelai->photo_pria }}" class="img-thumbnail rounded-circle foto-pria"
+                            alt="">
+                    </div>
+                    <div id="img-love" class="col-2 d-flex justify-content-center align-items-center">
+                        <img src="/front-end/img/love.png" alt="" class="mx-2 img-fluid love">
+                    </div>
+                    <div id="img-wanita" class="col-5">
+                        <img width="120px" src="{{ $mempelai->photo_wanita }}" class="img-thumbnail rounded-circle foto-wanita"
+                            alt="">
+                    </div>
+                </div>
+                <!-- Nama Pria -->
+                <div class="container d-flex flex-column justify-content-center align-items-center">
+                    <div class="row mt-5">
+                        <div id="nama-pria" class="col">
+                            <h1 style="font-family: 'Dancing Script', cursive; color: #3B486D;" class="fs-1 fw-bold">
+                                {{ucwords(strtolower( $mempelai->nama_pria)) }}
+                            </h1>
+                        </div>
+                    </div>
+                    <!-- Ortu Pria -->
+                    <div class="row">
+                        <div id="ortu-pria" class="col">
+                            <p class="fs-6">Putra Kedua dari Bpk {{ ucwords(strtolower($mempelai->bapak_pria)) }} dan Ibu {{ ucwords(strtolower($mempelai->ibu_pria)) }}</p>
+                        </div>
+                    </div>
+                    <!-- Nama Wanita -->
+                    <div class="row">
+                        <div id="nama-wanita" class="col">
+                            <h1 style="font-family: 'Dancing Script', cursive; color: #3B486D;" class="fs-1 fw-bold">{{ucwords(strtolower( $mempelai->nama_wanita)) }}</h1>
+                        </div>
+                    </div>
+                    <div class="row pb-5">
+                        <!-- ortu Wanita -->
+                        <div id="ortu-wanita" class="col">
+                            <p class="fs-6">Putra Kedua dari Bpk {{ucwords(strtolower( $mempelai->bapak_wanita)) }} dan Ibu {{ucwords(strtolower( $mempelai->ibu_wanita)) }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="waktu" class="p-2">
+            <div class="container-fluid kartu" style="padding : 10px 10px;">
+                <div class="row">
+                    <div id="day" class="col">
+                        <h1 class="h1 text-center fw-bold fs-1"
+                            style="font-family: 'Times New Roman', Times, serif; color:#3B486D">Acara</h1>
+                    </div>
+                </div>
+                <div class="kartu2" style="padding : 10px 10px;">
+                    <div class="row">
+                        <div id="akad" class="col">
+                            <p class="text-center fs-4 fw-bold mb-2 border rounded"
+                                style="font-family: 'Times New Roman', Times, serif; color:#3B486D">Akad Nikah</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="hari" class="col-12">
+                            <h5 class="text-center fw-bold"
+                                style="font-family: 'Times New Roman', Times, serif; color:#3B486D">{{ $hari[date('l', strtotime($mempelai->tanggal_akad))] }}</h5>
+                        </div>
+                    </div>
+                    <div class="row mt-1" style="color:#3B486D;font-family: 'Times New Roman', Times, serif;">
+                        <div id="tanggal" class="col-4 border-end">
+                            <h5 class="text-center fw-bold">{{ date('d', strtotime($mempelai->tanggal_akad)) }}</h5>
+                        </div>
+                        <div id="bulan" class="col-4 border-end">
+                            <h5 class="text-center fw-bold">{{ $bulan[date('F', strtotime($mempelai->tanggal_akad))] }}</h5>
+                        </div>
+                        <div id="tahun" class="col-4">
+                            <h5 class="text-center fw-bold">{{ date('Y', strtotime($mempelai->tanggal_akad)) }}</h5>
+                        </div>
+                    </div>
+                    <div class="row" style="color:#3B486D;font-family: 'Times New Roman', Times, serif;">
+                        <div id="tanggal-s" class="col-4">
+                            <h4 class="text-center fs-6">Tanggal</h4>
+                        </div>
+                        <div id="bulan-s" class="col-4">
+                            <h4 class="text-center fs-6">Bulan</h4>
+                        </div>
+                        <div id="tahun-s" class="col-4">
+                            <h4 class="text-center fs-6">Tahun</h4>
+                        </div>
+                    </div>
+                    <div id="pukul" class="row mt-2">
+                        <div class="col-12">
+                            <h6 class="text-center" style="font-size: 0.8em;">Pukul <span id="waktuBaru">{{ $mempelai->waktu_akad }}</span> - Selesai</h6>
+                        </div>
+                        <div class="col-12">
+                            <h6 class="text-center">Alamat:</h6>
+                        </div>
+                        <div class="col-12">
+                            <h6 class="text-center" style="font-size: 0.8em;">{{ $mempelai->alamat_akad }}</h6>
+                        </div>
+                    </div>
+                    <div id="maps" class="row">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <?= $mempelai->map_akad; ?>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ $mempelai->link_akad }}"
+                                            target="_blank" class="badge bg-primary mt-2"><i data-feather="map"
+                                                class="me-2"></i>Lihat Lokasi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="kartu2 mt-4 p-2" id="countdown">
+                        <input type="hidden" id="tanggal_akad_db" value="{{ $mempelai->tanggal_akad}}">
+                        <input type="hidden" id="waktu_akad_db" value="{{ $mempelai->waktu_akad }}">
+                        <div class="row d-flex justify-content-center align-items-center">
+                            <div class="col-3">
+                                <div class="card d-flex justify-content-center align-items-center">
+                                    <div class="card-body p-2 text-center">
+                                        <span class="d-block fs-2" id="cd-hari">3</span>
+                                        <span>Hari</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card d-flex justify-content-center align-items-center">
+                                    <div class="card-body text-center p-2">
+                                        <span class="d-block fs-2" n id="cd-jam">23</span>
+                                        <span>Jam</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card d-flex justify-content-center align-items-center">
+                                    <div class="card-body text-center p-2">
+                                        <span class="d-block fs-2" id="cd-menit">45</span>
+                                        <span>Menit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="card d-flex justify-content-center align-items-center">
+                                    <div class="card-body text-center p-2">
+                                        <span class="d-block fs-2" id="cd-detik">59</span>
+                                        <span>Detik</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3" id="party" style="padding-top:15px;">
+                        <div id="resepsi" class="col">
+                            <p class="text-center fs-4 fw-bold mb-2 border rounded"
+                                style="font-family: 'Times New Roman', Times, serif; color:#3B486D">Resepsi</p>
+                        </div>
+                    </div>
+                    <input type="hidden" id="waktu_resepsi_db" value="{{ $mempelai->waktu_resepsi }}">
+                    <div class="row">
+                        <div id="hari-r" class="col-12">
+                            <h5 class="text-center fw-bold"
+                                style="font-family: 'Times New Roman', Times, serif; color:#3B486D">{{ $hari[date('l', strtotime($mempelai->tanggal_resepsi))] }}</h5>
+                        </div>
+                    </div>
+                    <div class="row mt-1" style="color:#3B486D;font-family: 'Times New Roman', Times, serif;">
+                        <div id="tanggal-r" class="col-4 border-end">
+                            <h5 class="text-center fw-bold">{{ date('d', strtotime($mempelai->tanggal_resepsi)) }}</h5>
+                        </div>
+                        <div id="bulan-r" class="col-4 border-end">
+                            <h5 class="text-center fw-bold">{{ $bulan[date('F', strtotime($mempelai->tanggal_resepsi))] }}</h5>
+                        </div>
+                        <div id="tahun-r" class="col-4">
+                            <h5 class="text-center fw-bold">{{ date('Y', strtotime($mempelai->tanggal_resepsi)) }}</h5>
+                        </div>
+                    </div>
+                    <div class="row" style="color:#3B486D;font-family: 'Times New Roman', Times, serif;">
+                        <div id="tanggal-sr" class="col-4">
+                            <h4 class="text-center fs-6">Tanggal</h4>
+                        </div>
+                        <div id="bulan-sr" class="col-4">
+                            <h4 class="text-center fs-6">Bulan</h4>
+                        </div>
+                        <div id="tahun-sr" class="col-4">
+                            <h4 class="text-center fs-6">Tahun</h4>
+                        </div>
+                    </div>
+                    <div id="pukul-r" class="row mt-2">
+                        <div class="col-12">
+                            <h6 class="text-center" style="font-size: 0.8em;">Pukul <span id="waktu_res"></span> - Selesai</h6>
+                        </div>
+                        <div class="col-12">
+                            <h6 class="text-center">Alamat:</h6>
+                        </div>
+                        <div class="col-12">
+                            <h6 class="text-center" style="font-size: 0.8em;">M5W6+HVG, Jalan, Bungursari, Tasikmalaya
+                                Regency, West Java 46151</h6>
+                        </div>
+                    </div>
+                    <div id="maps-r" class="row" style="padding-bottom:70px">
+                        <div class="col">
+                            <div class="card">
+                                <div class="card-body">
+                                    <?= $mempelai->map_resepsi; ?>
+                                    <div class="d-flex justify-content-center align-items-center">
+                                        <a href="{{ $mempelai->link_resepsi }}"
+                                            target="_blank" class="badge bg-primary mt-2"><i data-feather="map"
+                                                class="me-2"></i>Lihat Lokasi</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="mb-3 p-2">
+            <div class="container-fluid kartu" style="padding : 10px 10px;">
+                <div class="row mb-3">
+                    <div class="col">
+                        <h1 id="judul-2" class="h1 text-center"
+                            style="font-family: 'Times New Roman', Times, serif; color:#3B486D">
+                            Gallery</h1>
+                    </div>
+                </div>
+                <div id="foto" class="row">
+                    @foreach ($photos as $photo)
+                    <div class="col-6 mb-3">
+                        <div>
+                            <div class="kartu2">
+                                <img src="{{ $photo->photo }}" alt="" class="img-fluid rounded">
+                            </div>
+                        </div>
+                    </div>    
+                    @endforeach
+                </div>
+        </section>
+        <section id="doa" class="mb-3 p-2">
+            <div class="container-fluid kartu" style="padding : 10px 10px;">
+                <h1 class="h1 text-center" style="font-family: 'Times New Roman', Times, serif; color:#3B486D">Ucapan &
+                    Doa</h1>
+                <div class="card">
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="nama-pengirim" class="form-label">Nama Pengirim</label>
+                                <input type="text" class="form-control" id="nama-pengirim" name="nama-pengirim">
+                            </div>
+                            <div class="mb-3">
+                                <label for="pesan" class="form-label">Pesan</label>
+                                <input type="text" class="form-control" id="pesan" name="pesan">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Kirim Ucapan</button>
+                        </form>
+                    </div>
+                    <div class="card border-0 p-2" style="height: 300px; overflow: auto;">
+                        <div class="card-body rounded" style="background-color: rgba(232, 10, 215, 0.1);">
+                            <div class="row mb-2">
+                                <div class="col-2">
+                                    <img src="https://source.unsplash.com/100x100?women-1" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10">
+                                    <p class="mb-0 ml-1">Nira Dyadara</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Selemat selamat menemuh hidup baru, Gian</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-2" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Tira Nurul Amelia</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Cie yang udah komit</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-3" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Tisha Maulida Fazriah</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Happy Wedding, A Gian</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-4" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Sofa Marwati</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Cie uum nyusul</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-5" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Seni Senia</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Alhamdulilah tos kenging teman hidup</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-6" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Puput Dwi O.</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Wah hebat. selamat nya um</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-2 mb-2">
+                                    <img src="https://source.unsplash.com/100x100?women-7" alt=""
+                                        class="img-fluid rounded-circle">
+                                </div>
+                                <div class="col-10 mb-2">
+                                    <p class="mb-0 ml-1">Mira Herawati</p>
+                                    <div class="card">
+                                        <div class="card-body p-1">
+                                            <p class="mb-0 ml-1">Samawa a uum</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="mengundang" class="mb-3 p-2">
+            <div class="container kartu" style="padding : 10px 10px;">
+                <div class="row mb-3">
+                    <div class="col">
+                        <h1 class="h1 text-center"
+                            style="font-family: 'Times New Roman', Times, serif; color:#3B486D">
+                            Turut Mengundang</h1>
+                    </div>
+                </div>
+                <div class="kartu2 p-2">
+                    <p class="p-0 mb-2">Keluarga Besar Bapak Erwin</p>
+                    <p class="p-0 mb-2">Keluarga Besar Bapak Rainer</p>
+                    <p class="p-0 mb-2">Keluarga Besar Bapak Eren Yeager</p>
+                    <p class="p-0 mb-2">Keluarga Besar Bapak Armin</p>
+                    <p class="p-0 mb-2">Keluarga Besar Ibu Anie Leonhard</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col mt-2">
+                    <h1 class="text-center fs-5 text-white">❣ Gian Production</h1>
+                    <div class="row">
+                        <div class="col mb-2 d-flex justify-content-center align-items-center">
+                            <img src="/front-end/img/icon/wa.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">082321634181</span>
+                        </div>
+                        <div class="col mb-2 d-flex justify-content-center align-items-center">
+                            <img src="/front-end/img/icon/gmail.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansonia555@gmail.com</span>
+                        </div>
+                        <div class="co mb-2l d-flex justify-content-center align-items-center">
+                            <a href="https://www.instagram.com/giansonia.io"></a><img src="/front-end/img/icon/ig.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansoniaputra</span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Feater Icon -->
+    <script>
+        feather.replace()
+    </script>
+    <!-- Countdown -->
+    <script src="/front-end/js/countdown.js"></script>
+    <!-- Animasi Javascript -->
+    <script src="/front-end/js/script2.js"></script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>
