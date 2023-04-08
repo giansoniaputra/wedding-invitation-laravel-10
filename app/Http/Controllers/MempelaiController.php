@@ -110,7 +110,14 @@ class MempelaiController extends Controller
      */
     public function destroy(Mempelai $mempelai)
     {
-        //
+        $data = Mempelai::where('id', $mempelai->id)->first();
+        Mempelai::where('id',$data->id)->delete();
+        Invited::where('mempelai_id', $data->id)->delete();
+        Photo::where('mempelai_id', $data->id)->delete();
+        Ucapan::where('mempelai_id', $data->id)->delete();
+
+        return redirect('/mempelai')->with(['success' => 'Data Berhasil Dihapus']);
+
     }
 
     public function updateDataMempelai(Request $request)
@@ -248,18 +255,53 @@ class MempelaiController extends Controller
                 }
             
                 return DataTables::of($data)->addColumn('action', function($row){
-                    $actionBtn = 
-                    '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                    <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
-                        <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
-                    </form>';
+                    if($row->activation == 0){
+                        $actionBtn = 
+                        '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                        <form action="/activasi" method="post" class="d-inline">
+                            <input type="hidden" name="_token" value="'.csrf_token().'">
+                            <input type="hidden" name="id" value="'.$row->id.'">
+                            <button type="submit" class="btn btn-success btn-sm delete-button"><i class="fas fa-check"></i></button>
+                        </form>
+                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                            <input type="hidden" name="_token" value="'.csrf_token().'">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="id" value="'.$row->id.'">
+                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fas fa-trash"></i></button>
+                            </form>
+                        ';
+                    }else {
+                        $actionBtn = 
+                        '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                        <form action="/activasi" method="post" class="d-inline">
+                        <input type="hidden" name="_token" value="'.csrf_token().'">
+                        <input type="hidden" name="id" value="'.$row->id.'">
+                        <button type="submit" class="btn btn-danger btn-sm delete-button"><i class="fas fa-times"></i></button>
+                        </form>
+                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                            <input type="hidden" name="_token" value="'.csrf_token().'">
+                            <input type="hidden" name="_method" value="DELETE">
+                            <input type="hidden" name="id" value="'.$row->id.'">
+                            <button type="submit" class="btn btn-danger btn-sm"><i class="fas fa-trash" onclick="return confirm(\'Apakah Anda Yakin?\')"></i></button>
+                        </form>
+                        ';
+                    }
                     return $actionBtn;
-                })->make(true);
+                })->addColumn('status', function ($row){
+                    if($row->activation == 0){
+                        $status = 'Not Activated';
+                    } else {
+                        $status = 'Activated';
+                    }
+                    return $status;
+                })
+                ->make(true);
             } else if(auth()->user()->roles == 'reseller'){
                 $query = DB::table('mempelai as a')->join('users as b', 'a.user_id', '=', 'b.id')->select('a.*','b.name')->where('user_id', auth()->user()->id);
                 $data = $query->get();
-
+                
                 foreach ($data as $row){
                     $row->pria = ucwords(strtolower($row->nama_pria));
                     $row->wanita = ucwords(strtolower($row->nama_wanita));
@@ -269,10 +311,20 @@ class MempelaiController extends Controller
                     $actionBtn = 
                     '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)" class="d-inline form-delete">
-                        <button type="button" class="btn btn-danger btn-sm delete-button" data-method="DELETE" data-token="'.csrf_token().'" data-id="'.$row->id.'"><i class="fas fa-trash"></i></button>
+                    <form action="/mempelai/'.$row->slug.'" method="post">
+                        <input type="hidden" name="_token" value="'.csrf_token().'">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="hidden" name="id" value="'.$row->id.'">
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fas fa-trash"></i></button>
                     </form>';
                     return $actionBtn;
+                })->addColumn('status', function ($row){
+                    if($row->activation == 0){
+                        $status = 'Not Activated';
+                    } else {
+                        $status = 'Activated';
+                    }
+                    return $status;
                 })->make(true);
             }
         }
@@ -447,5 +499,73 @@ class MempelaiController extends Controller
         } else {
             return view('not-activeted');
         }
+    }
+
+    // UCAPAN
+    public function kirimUcapan(Request $request)
+    {
+        $rules = [
+            'nama_pengirim' => 'required',
+            'pesan' => 'required',
+        ];
+        $pesan = [
+            'nama_pengirim.required' => 'Silahkan Isi Nama Anda.',
+            'pesan.required' => 'Silahkan Isi Ucapan Anda.',
+        ];
+
+        $validator = Validator::make($request->all(),$rules,$pesan);
+        if($validator->fails()){
+            return response()->json(['errors' => $validator->errors()]);
+        } else {
+            $data = [
+                'mempelai_id' => $request->id,
+                'ucapan' => $request->pesan,
+                'pengirim' => $request->nama_pengirim,
+            ];
+
+            $pesan_json = [
+                'pesan' => 'Pesan Anda Sudah Terkirim',
+                'id' => $request->id,
+            ];
+
+            Ucapan::create($data);
+            return response()->json(['success' => $pesan_json]);
+        }
+    }
+
+    public function reloadUcapan(Request $request) {
+        $ucapan = Ucapan::where('mempelai_id',$request->id)->get();
+        foreach ($ucapan as $row) {
+            echo '
+            <div class="row mb-2">
+                <div class="col-2">
+                    <img src="/front-end/img/icon/wa.png" alt=""
+                        class="img-fluid rounded-circle">
+                </div>
+                <div class="col-10">
+                    <p class="mb-0 ml-1">'.$row->pengirim.'</p>
+                    <div class="card">
+                        <div class="card-body p-1">
+                            <p class="mb-0 ml-1">'.$row->ucapan.'</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            ';
+        }
+    }
+
+    // Aktivasi
+    public function activasiUndangan(Request $request)
+    {
+        $data = Mempelai::where('id', $request->id)->first();
+        if($data->activation == 0){
+            Mempelai::where('id', $request->id)->update(['activation' => 1]);
+            return redirect('/mempelai')->with(['success' => 'Undangan Berhasil Di Aktivasi']);
+        } else {
+            Mempelai::where('id', $request->id)->update(['activation' => 0]);
+            return redirect('/mempelai')->with(['success' => 'Undangan Di Non-Aktifkan']);
+        }
+        
     }
 }

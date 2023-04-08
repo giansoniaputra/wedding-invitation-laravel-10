@@ -27,6 +27,7 @@
                                 <th>Nama Pria</th>
                                 <th>Nama Wanita</th>
                                 <th>Nama Reseller</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

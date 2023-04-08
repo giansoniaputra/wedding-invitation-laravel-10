@@ -99,67 +99,67 @@ $(document).ready(function () {
         $("#link_resepsi").removeClass("is-invalid")
     })
 
-    // NAVIGASI
-    data.on("click", function () {
-        akad_card.addClass("d-none")
-        gallery_card.addClass("d-none")
-        other_card.addClass("d-none")
-        data_card.removeClass("d-none")
+    // // NAVIGASI
+    // data.on("click", function () {
+    //     akad_card.addClass("d-none")
+    //     gallery_card.addClass("d-none")
+    //     other_card.addClass("d-none")
+    //     data_card.removeClass("d-none")
 
-        data.removeClass("text-info")
-        data.addClass("text-white")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
-    })
-    akad.on("click", function () {
-        akad_card.removeClass("d-none")
-        data_card.addClass("d-none")
-        gallery_card.addClass("d-none")
-        other_card.addClass("d-none")
+    //     data.removeClass("text-info")
+    //     data.addClass("text-white")
+    //     akad.removeClass("text-white")
+    //     akad.addClass("text-info")
+    //     gallery.removeClass("text-white")
+    //     gallery.addClass("text-info")
+    //     other.removeClass("text-white")
+    //     other.addClass("text-info")
+    // })
+    // akad.on("click", function () {
+    //     akad_card.removeClass("d-none")
+    //     data_card.addClass("d-none")
+    //     gallery_card.addClass("d-none")
+    //     other_card.addClass("d-none")
 
-        akad.removeClass("text-info")
-        akad.addClass("text-white")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
-    })
-    gallery.on("click", function () {
-        gallery_card.removeClass("d-none")
-        akad_card.addClass("d-none")
-        data_card.addClass("d-none")
-        other_card.addClass("d-none")
+    //     akad.removeClass("text-info")
+    //     akad.addClass("text-white")
+    //     data.removeClass("text-white")
+    //     data.addClass("text-info")
+    //     gallery.removeClass("text-white")
+    //     gallery.addClass("text-info")
+    //     other.removeClass("text-white")
+    //     other.addClass("text-info")
+    // })
+    // gallery.on("click", function () {
+    //     gallery_card.removeClass("d-none")
+    //     akad_card.addClass("d-none")
+    //     data_card.addClass("d-none")
+    //     other_card.addClass("d-none")
 
-        gallery.removeClass("text-info")
-        gallery.addClass("text-white")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
-    })
-    other.on("click", function () {
-        akad_card.addClass("d-none")
-        gallery_card.addClass("d-none")
-        data_card.addClass("d-none")
-        other_card.removeClass("d-none")
+    //     gallery.removeClass("text-info")
+    //     gallery.addClass("text-white")
+    //     akad.removeClass("text-white")
+    //     akad.addClass("text-info")
+    //     data.removeClass("text-white")
+    //     data.addClass("text-info")
+    //     other.removeClass("text-white")
+    //     other.addClass("text-info")
+    // })
+    // other.on("click", function () {
+    //     akad_card.addClass("d-none")
+    //     gallery_card.addClass("d-none")
+    //     data_card.addClass("d-none")
+    //     other_card.removeClass("d-none")
 
-        other.removeClass("text-info")
-        other.addClass("text-white")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
-    })
+    //     other.removeClass("text-info")
+    //     other.addClass("text-white")
+    //     data.removeClass("text-white")
+    //     data.addClass("text-info")
+    //     gallery.removeClass("text-white")
+    //     gallery.addClass("text-info")
+    //     akad.removeClass("text-white")
+    //     akad.addClass("text-info")
+    // })
 
     $("#btn-back-1").on("click", function () {
         akad_card.addClass("d-none")
@@ -190,6 +190,37 @@ $(document).ready(function () {
         data.addClass("text-info")
         other.removeClass("text-white")
         other.addClass("text-info")
+    })
+    $("#btn-back-2").on("click", function () {
+        gallery_card.addClass("d-none")
+        akad_card.removeClass("d-none")
+        data_card.addClass("d-none")
+        other_card.addClass("d-none")
+
+        akad.removeClass("text-info")
+        akad.addClass("text-white")
+        gallery.removeClass("text-white")
+        gallery.addClass("text-info")
+        data.removeClass("text-white")
+        data.addClass("text-info")
+        other.removeClass("text-white")
+        other.addClass("text-info")
+    })
+
+    $("#save-gallery").on("click", function () {
+        gallery_card.addClass("d-none")
+        akad_card.addClass("d-none")
+        data_card.addClass("d-none")
+        other_card.removeClass("d-none")
+
+        other.removeClass("text-info")
+        other.addClass("text-white")
+        gallery.removeClass("text-white")
+        gallery.addClass("text-info")
+        data.removeClass("text-white")
+        data.addClass("text-info")
+        akad.removeClass("text-white")
+        akad.addClass("text-info")
     })
 
     // SLUGGEBLE
@@ -642,8 +673,8 @@ $(document).ready(function () {
 
     $(".crop_pria").on('click', function () {
         canvas = cropper.getCroppedCanvas({
-            width: 160,
-            height: 160,
+            width: 1000,
+            height: 1000,
         })
 
         canvas.toBlob(function (blob) {
@@ -667,8 +698,8 @@ $(document).ready(function () {
 
     $(".crop_wanita").on('click', function () {
         canvas = cropper.getCroppedCanvas({
-            width: 160,
-            height: 160,
+            width: 1000,
+            height: 1000,
         })
 
         canvas.toBlob(function (blob) {
@@ -692,8 +723,8 @@ $(document).ready(function () {
 
     $(".crop_gallery").on('click', function () {
         canvas = cropper.getCroppedCanvas({
-            width: 160,
-            height: 160,
+            width: 1000,
+            height: 1000,
         })
 
         canvas.toBlob(function (blob) {
@@ -707,4 +738,5 @@ $(document).ready(function () {
 
         modal.modal("hide")
     })
+    
 })

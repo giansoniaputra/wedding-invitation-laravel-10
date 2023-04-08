@@ -346,118 +346,41 @@
                     Doa</h1>
                 <div class="card">
                     <div class="card-body">
-                        <form>
+                        <form action="javascript:void(0)">
+                            @csrf
+                            <input type="hidden" name="id" value="{{ $mempelai->id }}">
                             <div class="mb-3">
                                 <label for="nama-pengirim" class="form-label">Nama Pengirim</label>
-                                <input type="text" class="form-control" id="nama-pengirim" name="nama-pengirim">
+                                <input type="text" class="form-control" id="nama-pengirim" name="nama_pengirim">
                             </div>
                             <div class="mb-3">
                                 <label for="pesan" class="form-label">Pesan</label>
                                 <input type="text" class="form-control" id="pesan" name="pesan">
                             </div>
-                            <button type="submit" class="btn btn-primary">Kirim Ucapan</button>
+                            <div class="mt-1 mb-3">
+                                <small class="terkirim text-success"></small>
+                            </div>
+                            <button type="submit" class="btn btn-primary send-ucapan">Kirim Ucapan</button>
                         </form>
                     </div>
                     <div class="card border-0 p-2" style="height: 300px; overflow: auto;">
-                        <div class="card-body rounded" style="background-color: rgba(232, 10, 215, 0.1);">
+                        <div class="card-body rounded refresh" style="background-color: rgba(232, 10, 215, 0.1);">
+                            @foreach ($ucapan as $row)
                             <div class="row mb-2">
                                 <div class="col-2">
-                                    <img src="https://source.unsplash.com/100x100?women-1" alt=""
+                                    <img src="/front-end/img/icon/wa.png" alt=""
                                         class="img-fluid rounded-circle">
                                 </div>
                                 <div class="col-10">
-                                    <p class="mb-0 ml-1">Nira Dyadara</p>
+                                    <p class="mb-0 ml-1">{{ $row->pengirim }}</p>
                                     <div class="card">
                                         <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Selemat selamat menemuh hidup baru, Gian</p>
+                                            <p class="mb-0 ml-1">{{ $row->ucapan }}</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-2" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Tira Nurul Amelia</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Cie yang udah komit</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-3" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Tisha Maulida Fazriah</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Happy Wedding, A Gian</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-4" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Sofa Marwati</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Cie uum nyusul</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-5" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Seni Senia</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Alhamdulilah tos kenging teman hidup</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-6" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Puput Dwi O.</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Wah hebat. selamat nya um</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-2">
-                                <div class="col-2 mb-2">
-                                    <img src="https://source.unsplash.com/100x100?women-7" alt=""
-                                        class="img-fluid rounded-circle">
-                                </div>
-                                <div class="col-10 mb-2">
-                                    <p class="mb-0 ml-1">Mira Herawati</p>
-                                    <div class="card">
-                                        <div class="card-body p-1">
-                                            <p class="mb-0 ml-1">Samawa a uum</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -474,11 +397,9 @@
                     </div>
                 </div>
                 <div class="kartu2 p-2">
-                    <p class="p-0 mb-2">Keluarga Besar Bapak Erwin</p>
-                    <p class="p-0 mb-2">Keluarga Besar Bapak Rainer</p>
-                    <p class="p-0 mb-2">Keluarga Besar Bapak Eren Yeager</p>
-                    <p class="p-0 mb-2">Keluarga Besar Bapak Armin</p>
-                    <p class="p-0 mb-2">Keluarga Besar Ibu Anie Leonhard</p>
+                    @foreach ($invited as $invite)
+                    <p class="p-0 mb-2">{{ $invite->invited }}</p>
+                    @endforeach
                 </div>
             </div>
         </section>
@@ -508,6 +429,7 @@
     <script>
         feather.replace()
     </script>
+    <script src="/js/page-script/front-end.js"></script>
     <!-- Countdown -->
     <script src="/front-end/js/countdown.js"></script>
     <!-- Animasi Javascript -->

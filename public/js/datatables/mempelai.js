@@ -10,7 +10,7 @@ $(document).ready(function () {
         "serverSide": true,
         "ajax": "dataTablesMempelai",
         "columnDefs": [{
-            "targets": [3], // index kolom atau sel yang ingin diatur
+            "targets": [3,4,5], // index kolom atau sel yang ingin diatur
             "className": 'text-center' // kelas CSS untuk memposisikan isi ke tengah
         }],
         "columns": [{
@@ -26,6 +26,11 @@ $(document).ready(function () {
             },
             {
                 "data": "name"
+            },
+            {
+                "data": "status",
+                "orderable": true,
+                "searchable": true
             },
             {
                 "data": "action",

@@ -17,10 +17,10 @@
 </style>
 <nav>
     <ol class="breadcrumb bg-dark">
-        <li class="breadcrumb-item"><a href="javascript:;" id="data" class="text-white">Data Mempelai</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="akad" class="text-info">Akad dan Resepsi</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="gallery" class="text-info">Gallery</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="other" class="text-info">Lainnya</a></li>
+        <li class="breadcrumb-item"><span id="data" class="text-white">Data Mempelai</span></li>
+        <li class="breadcrumb-item"><span id="akad" class="text-info">Akad dan Resepsi</span></li>
+        <li class="breadcrumb-item"><span id="gallery" class="text-info">Gallery</span></li>
+        <li class="breadcrumb-item"><span id="other" class="text-info">Lainnya</span></li>
     </ol>
 </nav>
 
@@ -284,6 +284,20 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-sm-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-warning btn-icon-split mb-4" id="btn-back-2">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-backward"></i>
+                    </span>
+                    <span class="text">Kembali</span>
+                </button>
+                <button type="submit" class="btn btn-primary btn-icon-split ml-2 mr-4 mb-4" id="save-gallery">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-forward"></i>
+                    </span>
+                    <span class="text">Selanjutnya</span>
+                </button>
             </div>
         </div>
     </form>

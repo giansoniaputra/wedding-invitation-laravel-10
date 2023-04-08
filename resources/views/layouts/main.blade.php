@@ -41,10 +41,11 @@
     <link rel="stylesheet" href="/css/cropper.min.css">
     <script src="/js/cropper.min.js"></script>
 
+
 </head>
 
 <body id="page-top">
-
+    <div id="spinner-container"></div>
     <!-- Page Wrapper -->
     <div id="wrapper">
 
