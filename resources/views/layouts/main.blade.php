@@ -41,6 +41,11 @@
     <link rel="stylesheet" href="/css/cropper.min.css">
     <script src="/js/cropper.min.js"></script>
 
+    {{-- NProgres --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+
+
 
 </head>
 

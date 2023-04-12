@@ -17,10 +17,10 @@
 </style>
 <nav>
     <ol class="breadcrumb bg-dark">
-        <li class="breadcrumb-item"><span id="data" class="text-white">Data Mempelai</span></li>
-        <li class="breadcrumb-item"><span id="akad" class="text-info">Akad dan Resepsi</span></li>
-        <li class="breadcrumb-item"><span id="gallery" class="text-info">Gallery</span></li>
-        <li class="breadcrumb-item"><span id="other" class="text-info">Lainnya</span></li>
+        <li class="breadcrumb-item" id="data"><span  class="text-white">Data Mempelai</span></li>
+        <li class="breadcrumb-item d-none" id="akad"><span class="text-info">Akad dan Resepsi</span></li>
+        <li class="breadcrumb-item d-none" id="gallery"><span class="text-info">Gallery</span></li>
+        <li class="breadcrumb-item d-none" id="other"><span class="text-info">Lainnya</span></li>
     </ol>
 </nav>
 

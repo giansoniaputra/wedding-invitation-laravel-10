@@ -91,7 +91,7 @@ class MempelaiController extends Controller
             'data' => $mempelai,
             'templates' => Template::all(),
             'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
-            'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
+            'photos' => Photo::where('mempelai_id', $mempelai->id)->orderBy('id', 'DESC')->get(),
         ];
 
        return view('mempelai.edit',$data);
@@ -402,7 +402,7 @@ class MempelaiController extends Controller
 
     public function reloadGallery(Request $request)
     {
-        $photos = Photo::where('mempelai_id', $request->id)->get();
+        $photos = Photo::where('mempelai_id', $request->id)->orderBy('id', 'DESC')->get();
         echo '
         <div class="col">
         <div class="card m-4">
@@ -424,6 +424,20 @@ class MempelaiController extends Controller
                         </div>
                     </div>
                 </div>
+                <div class="col-sm-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-warning btn-icon-split mb-4" id="btn-back-2">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-backward"></i>
+                    </span>
+                    <span class="text">Kembali</span>
+                </button>
+                <button type="submit" class="btn btn-primary btn-icon-split ml-2 mr-4 mb-4" id="save-gallery">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-forward"></i>
+                    </span>
+                    <span class="text">Selanjutnya</span>
+                </button>
+            </div>
             ';
     }
 

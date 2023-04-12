@@ -99,82 +99,17 @@ $(document).ready(function () {
         $("#link_resepsi").removeClass("is-invalid")
     })
 
-    // // NAVIGASI
-    // data.on("click", function () {
-    //     akad_card.addClass("d-none")
-    //     gallery_card.addClass("d-none")
-    //     other_card.addClass("d-none")
-    //     data_card.removeClass("d-none")
-
-    //     data.removeClass("text-info")
-    //     data.addClass("text-white")
-    //     akad.removeClass("text-white")
-    //     akad.addClass("text-info")
-    //     gallery.removeClass("text-white")
-    //     gallery.addClass("text-info")
-    //     other.removeClass("text-white")
-    //     other.addClass("text-info")
-    // })
-    // akad.on("click", function () {
-    //     akad_card.removeClass("d-none")
-    //     data_card.addClass("d-none")
-    //     gallery_card.addClass("d-none")
-    //     other_card.addClass("d-none")
-
-    //     akad.removeClass("text-info")
-    //     akad.addClass("text-white")
-    //     data.removeClass("text-white")
-    //     data.addClass("text-info")
-    //     gallery.removeClass("text-white")
-    //     gallery.addClass("text-info")
-    //     other.removeClass("text-white")
-    //     other.addClass("text-info")
-    // })
-    // gallery.on("click", function () {
-    //     gallery_card.removeClass("d-none")
-    //     akad_card.addClass("d-none")
-    //     data_card.addClass("d-none")
-    //     other_card.addClass("d-none")
-
-    //     gallery.removeClass("text-info")
-    //     gallery.addClass("text-white")
-    //     akad.removeClass("text-white")
-    //     akad.addClass("text-info")
-    //     data.removeClass("text-white")
-    //     data.addClass("text-info")
-    //     other.removeClass("text-white")
-    //     other.addClass("text-info")
-    // })
-    // other.on("click", function () {
-    //     akad_card.addClass("d-none")
-    //     gallery_card.addClass("d-none")
-    //     data_card.addClass("d-none")
-    //     other_card.removeClass("d-none")
-
-    //     other.removeClass("text-info")
-    //     other.addClass("text-white")
-    //     data.removeClass("text-white")
-    //     data.addClass("text-info")
-    //     gallery.removeClass("text-white")
-    //     gallery.addClass("text-info")
-    //     akad.removeClass("text-white")
-    //     akad.addClass("text-info")
-    // })
-
     $("#btn-back-1").on("click", function () {
+        document.location.href = "#"
         akad_card.addClass("d-none")
         gallery_card.addClass("d-none")
         other_card.addClass("d-none")
         data_card.removeClass("d-none")
 
-        data.removeClass("text-info")
-        data.addClass("text-white")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
+        $("#data").removeClass('d-none')
+        $("#data span").removeClass('text-info')
+        $("#data span").addClass('text-white')
+        $("#akad").addClass('d-none')
     })
     $("#btn-back-3").on("click", function () {
         gallery_card.removeClass("d-none")
@@ -182,45 +117,32 @@ $(document).ready(function () {
         data_card.addClass("d-none")
         other_card.addClass("d-none")
 
-        gallery.removeClass("text-info")
-        gallery.addClass("text-white")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
+        $("#gallery span").removeClass('text-info')
+        $("#gallery span").addClass('text-white')
+        $("#other").addClass('d-none')
     })
     $("#btn-back-2").on("click", function () {
+        document.location.href = "#"
         gallery_card.addClass("d-none")
         akad_card.removeClass("d-none")
         data_card.addClass("d-none")
         other_card.addClass("d-none")
-
-        akad.removeClass("text-info")
-        akad.addClass("text-white")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        other.removeClass("text-white")
-        other.addClass("text-info")
+        $("#akad span").removeClass('text-info')
+        $("#akad span").addClass('text-white')
+        $("#gallery").addClass('d-none')
     })
 
-    $("#save-gallery").on("click", function () {
+    $("#refresh-gallery").on("click", "#save-gallery", function () {
         gallery_card.addClass("d-none")
         akad_card.addClass("d-none")
         data_card.addClass("d-none")
         other_card.removeClass("d-none")
 
-        other.removeClass("text-info")
-        other.addClass("text-white")
-        gallery.removeClass("text-white")
-        gallery.addClass("text-info")
-        data.removeClass("text-white")
-        data.addClass("text-info")
-        akad.removeClass("text-white")
-        akad.addClass("text-info")
+        $("#other").removeClass('d-none')
+        $("#other span").removeClass('text-info')
+        $("#other span").addClass('text-white')
+        $("#gallery span").removeClass('text-white')
+        $("#gallery span").addClass('text-info')
     })
 
     // SLUGGEBLE
@@ -259,6 +181,14 @@ $(document).ready(function () {
 
     // Update Data Mempelai
     $('#save-data').on('click', function (e) {
+        $("#akad").removeClass('d-none')
+        $("#akad span").removeClass('text-info')
+        $("#akad span").addClass('text-white')
+        $("#data span").removeClass('text-white')
+        $("#data span").addClass('text-info')
+
+
+        NProgress.start();
         var formdata = $("#data-card form").serializeArray();
         var data = {};
         $(formdata).each(function (index, obj) {
@@ -273,8 +203,15 @@ $(document).ready(function () {
                 // console.log(response);
                 if (response.errors) {
                     // Jika ada pesan error, tampilkan pesan error pada form
+                    $("#data").removeClass('d-none')
+                    $("#data span").removeClass('text-info')
+                    $("#data span").addClass('text-white')
+                    $("#akad").addClass('d-none')
+                    document.location.href = "#"
+                    NProgress.done();
                     displayErrors(response.errors);
                 } else {
+                    NProgress.done();
                     $("#data-card").addClass("d-none")
                     $("#gallery-card").addClass("d-none")
                     $("#other-card").addClass("d-none")
@@ -288,6 +225,8 @@ $(document).ready(function () {
                     $("#other").addClass("text-info")
                     $("#gallery").removeClass("text-white")
                     $("#gallery").addClass("text-info")
+
+                    document.location.href = "#"
                 }
             },
             error: function (xhr) {
@@ -299,6 +238,12 @@ $(document).ready(function () {
 
     // Update Data Akad dan REsepsi
     $('#save-akad').on('click', function (e) {
+        $("#gallery").removeClass('d-none')
+        $("#gallery span").removeClass('text-info')
+        $("#gallery span").addClass('text-white')
+        $("#akad span").removeClass('text-white')
+        $("#akad span").addClass('text-info')
+        NProgress.start();
         var formdata = $("#akad-card form").serializeArray();
         var data = {};
         $(formdata).each(function (index, obj) {
@@ -313,9 +258,17 @@ $(document).ready(function () {
                 // console.log(response);
                 if (response.errors) {
                     // Jika ada pesan error, tampilkan pesan error pada form
+                    $("#akad").removeClass('d-none')
+                    $("#akad span").removeClass('text-info')
+                    $("#akad span").addClass('text-white')
+                    $("#data span").removeClass('text-white')
+                    $("#data span").addClass('text-info')
+                    $("#gallery").addClass('d-none')
+                    NProgress.done();
                     displayErrors(response.errors);
+                    document.location.href = "#"
                 } else {
-                    console.log(response.success);
+                    NProgress.done();
                     $("#data-card").addClass("d-none")
                     $("#gallery-card").removeClass("d-none")
                     $("#other-card").addClass("d-none")
@@ -329,6 +282,7 @@ $(document).ready(function () {
                     $("#other").addClass("text-info")
                     $("#akad").removeClass("text-white")
                     $("#akad").addClass("text-info")
+                    document.location.href = "#"
                 }
             },
             error: function (xhr) {
@@ -463,6 +417,7 @@ $(document).ready(function () {
     });
 
     $("#save-photo").on('click', function () {
+        NProgress.start();
         var formdata = $("#gallery-card form").serializeArray();
         var data = {};
         $(formdata).each(function (index, obj) {
@@ -478,6 +433,7 @@ $(document).ready(function () {
                 // console.log(response);
                 if (response.errors) {
                     //Jika ada pesan error, tampilkan pesan error pada form
+                    NProgress.done();
                     displayErrors(response.errors);
                 } else {
                     // Jika tidak ada pesan error, tampilkan pesan sukses pada form
@@ -488,6 +444,7 @@ $(document).ready(function () {
                             id: response.success.mempelai_id
                         },
                         success: function (data) {
+                            NProgress.done();
                             $('#refresh-gallery').html(data);
                         }
                     });
@@ -514,6 +471,7 @@ $(document).ready(function () {
     })
 
     $("#refresh-gallery").on('click', '.btn-hapus-foto', function () {
+        NProgress.start();
         let id = $(this).attr('data-id');
         let mempelai_id = $(this).attr('data-mempelai_id');
         $.ajax({
@@ -529,6 +487,7 @@ $(document).ready(function () {
                 if (response.errors) {
                     //Jika ada pesan error, tampilkan pesan error pada form
                     // displayErrors(response.errors);
+                    NProgress.done();
                 } else {
                     $.ajax({
                         url: '/load-content',
@@ -536,6 +495,7 @@ $(document).ready(function () {
                             id: response.success.mempelai_id
                         },
                         success: function (data) {
+                            NProgress.done();
                             $('#refresh-gallery').html(data);
                         }
                     });
@@ -738,5 +698,5 @@ $(document).ready(function () {
 
         modal.modal("hide")
     })
-    
+
 })
