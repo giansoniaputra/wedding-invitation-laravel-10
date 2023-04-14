@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\StoryController;
 use App\Http\Controllers\MempelaiController;
 
 /*
@@ -50,6 +51,7 @@ Route::resource('/mempelai', MempelaiController::class)->middleware('auth');
     // Datatables
 Route::get('/dataTablesMempelai', [MempelaiController::class, 'dataTables'])->middleware('auth');
 Route::get('/dataTablesInvited', [MempelaiController::class, 'dataTablesInvited'])->middleware('auth');
+Route::get('/dataTablesStory', [StoryController::class, 'dataTables'])->middleware('auth');
     //Create Slug
 Route::get('/createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
     //Update Data Mempelai
@@ -74,5 +76,12 @@ Route::get('/load-ucapan',[MempelaiController::class, 'reloadUcapan'])->middlewa
 Route::post('/activasi', [MempelaiController::class, 'activasiUndangan'])->middleware('auth');
     // MENAMPILKAN FRONT END (harus paling bawah)
 Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
+
+// STORY-------------------------------------------------------------------------------
+Route::resource('/mempelai/{mempelai:slug}/story', StoryController::class)->middleware('auth');
+Route::get('/story-aktif/{mempelai:slug}', [StoryController::class, 'aktif'])->middleware('auth');
+Route::get('/getIdStory/{story:id}', [StoryController::class, 'getIdStory'])->middleware('auth');
+Route::post('/updateStory', [StoryController::class,'update_2'])->middleware('auth');
+Route::post('/deleteStory', [StoryController::class,'delete'])->middleware('auth');
 
 

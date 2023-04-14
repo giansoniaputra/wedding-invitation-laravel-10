@@ -60,6 +60,7 @@ class MempelaiController extends Controller
                 'template_id' => $request->template,
                 'slug' => $request->slug,
                 'activation' => 0,
+                'story' => 0,
                 'user_id' => auth()->user()->id,
             ];
 
@@ -259,10 +260,11 @@ class MempelaiController extends Controller
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
                         <form action="/activasi" method="post" class="d-inline">
-                            <input type="hidden" name="_token" value="'.csrf_token().'">
-                            <input type="hidden" name="id" value="'.$row->id.'">
-                            <button type="submit" class="btn btn-success btn-sm delete-button"><i class="fas fa-check"></i></button>
+                        <input type="hidden" name="_token" value="'.csrf_token().'">
+                        <input type="hidden" name="id" value="'.$row->id.'">
+                        <button type="submit" class="btn btn-success btn-sm delete-button"><i class="fas fa-check"></i></button>
                         </form>
                         <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
                             <input type="hidden" name="_token" value="'.csrf_token().'">
@@ -275,6 +277,7 @@ class MempelaiController extends Controller
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
                         <form action="/activasi" method="post" class="d-inline">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
                         <input type="hidden" name="id" value="'.$row->id.'">
