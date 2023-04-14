@@ -132,6 +132,8 @@ class MempelaiController extends Controller
             'bapak_pria' => 'required',
             'ibu_wanita' => 'required',
             'bapak_wanita' => 'required',
+            'putra_ke' => 'required',
+            'putri_ke' => 'required',
         ];
         $pesan = [
             'nama_pria.required' => 'Tidak Boleh Kosong!',
@@ -142,6 +144,8 @@ class MempelaiController extends Controller
             'bapak_pria.required' => 'Tidak Boleh Kosong!.',
             'ibu_wanita.required' => 'Tidak Boleh Kosong!',
             'bapak_wanita.required' => 'Tidak Boleh Kosong!',
+            'putra_ke.required' => 'Tidak Boleh Kosong!',
+            'putri_ke.required' => 'Tidak Boleh Kosong!',
         ];
         $validator = Validator::make($request->all(), $rules, $pesan);
         if ($validator->fails()) {
@@ -158,6 +162,8 @@ class MempelaiController extends Controller
                 'bapak_wanita' => $request->bapak_wanita,
                 'photo_pria' => $request->fotoPria,
                 'photo_wanita' => $request->fotoWanita,
+                'putra_ke' => $request->putra_ke,
+                'putri_ke' => $request->putri_ke,
             ];
 
             Mempelai::where('id', $request->id)->update($data);

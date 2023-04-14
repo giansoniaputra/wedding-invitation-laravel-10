@@ -66,6 +66,12 @@ $(document).ready(function () {
     $("#bapak_wanita").on("click", function () {
         $("#bapak_wanita").removeClass("is-invalid")
     })
+    $("#putri_ke").on("change", function () {
+        $("#putri_ke").removeClass("is-invalid")
+    })
+    $("#putra_ke").on("change", function () {
+        $("#putra_ke").removeClass("is-invalid")
+    })
 
     //Reset Akad
     $("#tanggal_akad").on("click", function () {

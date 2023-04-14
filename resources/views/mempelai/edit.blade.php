@@ -17,7 +17,7 @@
 </style>
 <nav>
     <ol class="breadcrumb bg-dark">
-        <li class="breadcrumb-item" id="data"><span  class="text-white">Data Mempelai</span></li>
+        <li class="breadcrumb-item" id="data"><span class="text-white">Data Mempelai</span></li>
         <li class="breadcrumb-item d-none" id="akad"><span class="text-info">Akad dan Resepsi</span></li>
         <li class="breadcrumb-item d-none" id="gallery"><span class="text-info">Gallery</span></li>
         <li class="breadcrumb-item d-none" id="other"><span class="text-info">Lainnya</span></li>
@@ -97,6 +97,25 @@
             </div>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
+                    <label for="putra_ke">Putra Ke-</label>
+                    <select class="form-control" id="putra_ke" name="putra_ke" value="{{ $data->putra_ke }}">
+                        <option value="">Pilih...</option>
+                        <option value="Pertama">Pertama</option>
+                        <option value="Kedua">Kedua</option>
+                        <option value="ketiga">ketiga</option>
+                        <option value="Keempat">Keempat</option>
+                        <option value="Kelima">Kelima</option>
+                        <option value="Keenam">Keenam</option>
+                        <option value="Ketujuh">Ketujuh</option>
+                        <option value="Kedelapan">Kedelapan</option>
+                        <option value="Kesembilan">Kesembilan</option>
+                        <option value="Kesepuluh">Kesepuluh</option>
+                        <option value="Kesebelas">Kesebelas</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row d-flex flex-column align-items-center text-center">
+                <div class="col-sm-4">
                     <div class="mb-3">
                         <label for="ibu_wanita" class="form-label">Nama Ibu Wanita</label>
                         <input type="text" class="form-control" name="ibu_wanita" id="ibu_wanita"
@@ -111,6 +130,25 @@
                         <input type="text" class="form-control" name="bapak_wanita" id="bapak_wanita"
                             value="{{ $data->bapak_wanita }}">
                     </div>
+                </div>
+            </div>
+            <div class="row d-flex flex-column align-items-center text-center mb-3">
+                <div class="col-sm-4">
+                    <label for="putri_ke">Putri Ke-</label>
+                    <select class="form-control" id="putri_ke" name="putri_ke" value="{{ $data->putri_ke }}">
+                        <option value="">Pilih...</option>
+                        <option value="Pertama">Pertama</option>
+                        <option value="Kedua">Kedua</option>
+                        <option value="ketiga">ketiga</option>
+                        <option value="Keempat">Keempat</option>
+                        <option value="Kelima">Kelima</option>
+                        <option value="Keenam">Keenam</option>
+                        <option value="Ketujuh">Ketujuh</option>
+                        <option value="Kedelapan">Kedelapan</option>
+                        <option value="Kesembilan">Kesembilan</option>
+                        <option value="Kesepuluh">Kesepuluh</option>
+                        <option value="Kesebelas">Kesebelas</option>
+                    </select>
                 </div>
             </div>
             <div class="row">

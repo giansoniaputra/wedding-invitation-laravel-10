@@ -129,7 +129,7 @@
                     <!-- Ortu Pria -->
                     <div class="row">
                         <div id="ortu-pria" class="col">
-                            <p class="fs-6">Putra Kedua dari Bpk {{ ucwords(strtolower($mempelai->bapak_pria)) }} dan Ibu {{ ucwords(strtolower($mempelai->ibu_pria)) }}</p>
+                            <p class="fs-6 text-center">Putra {{ $mempelai->putra_ke }} dari Bpk {{ ucwords(strtolower($mempelai->bapak_pria)) }} dan Ibu {{ ucwords(strtolower($mempelai->ibu_pria)) }}</putra_ke>
                         </div>
                     </div>
                     <!-- Nama Wanita -->
@@ -141,7 +141,7 @@
                     <div class="row pb-5">
                         <!-- ortu Wanita -->
                         <div id="ortu-wanita" class="col">
-                            <p class="fs-6">Putra Kedua dari Bpk {{ucwords(strtolower( $mempelai->bapak_wanita)) }} dan Ibu {{ucwords(strtolower( $mempelai->ibu_wanita)) }}</p>
+                            <p class="fs-6 text-center">Putra {{ $mempelai->putra_ke }} dari Bpk {{ucwords(strtolower( $mempelai->bapak_wanita)) }} dan Ibu {{ucwords(strtolower( $mempelai->ibu_wanita)) }}</p>
                         </div>
                     </div>
                 </div>
