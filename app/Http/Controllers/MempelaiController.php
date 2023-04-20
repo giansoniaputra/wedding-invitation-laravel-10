@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Photo;
+use App\Models\Story;
 use App\Models\Ucapan;
 use App\Models\Invited;
 use App\Models\Mempelai;
@@ -75,6 +76,17 @@ class MempelaiController extends Controller
     public function show(Mempelai $mempelai)
     {
         //
+    }
+    public function name(Mempelai $mempelai, $anything)
+    {
+        $data = [
+            'mempelai' => $mempelai,
+            'nama' => $anything,
+        ];
+        $templates = Template::where('id', $mempelai->template_id)->first();
+        if($templates->template == 'flower-pink'){
+            return view('front-end.cover-flower-pink', $data);
+        }
     }
 
     /**
@@ -319,13 +331,15 @@ class MempelaiController extends Controller
                 return DataTables::of($data)->addColumn('action', function($row){
                     $actionBtn = 
                     '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                    <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                    <form action="/mempelai/'.$row->slug.'" method="post">
-                        <input type="hidden" name="_token" value="'.csrf_token().'">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="id" value="'.$row->id.'">
-                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fas fa-trash"></i></button>
-                    </form>';
+                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
+                     <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
+                     <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                         <input type="hidden" name="_token" value="'.csrf_token().'">
+                         <input type="hidden" name="_method" value="DELETE">
+                         <input type="hidden" name="id" value="'.$row->id.'">
+                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fas fa-trash"></i></button>
+                         </form>
+                     ';
                     return $actionBtn;
                 })->addColumn('status', function ($row){
                     if($row->activation == 0){
@@ -514,9 +528,10 @@ class MempelaiController extends Controller
                 'mempelai' => $mempelai,
                 'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
                 'photos' => Photo::where('mempelai_id', $mempelai->id)->get(),
-                'ucapan' => Ucapan::where('mempelai_id', $mempelai->id)->get(),
+                'ucapan' => Ucapan::where('mempelai_id', $mempelai->id)->orderBy('id', 'DESC')->get(),
                 'hari' => $daftar_hari,
                 'bulan' => $daftar_bulan,
+                'stories' => Story::where('mempelai_id', $mempelai->id)->get(),
             ];
             return view('front-end.'.$template->template, $data);
         } else {
@@ -557,19 +572,21 @@ class MempelaiController extends Controller
     }
 
     public function reloadUcapan(Request $request) {
-        $ucapan = Ucapan::where('mempelai_id',$request->id)->get();
+        $ucapan = Ucapan::where('mempelai_id',$request->id)->orderBy('id', 'DESC')->get();
         foreach ($ucapan as $row) {
             echo '
             <div class="row mb-2">
-                <div class="col-2">
-                    <img src="/front-end/img/icon/wa.png" alt=""
-                        class="img-fluid rounded-circle">
+                <div class="col d-flex align-items-center">
+                    <img src="/front-end/img/icon/poster.png" alt="" class="img-fluid rounded-circle" width="30px">
+                    <p class="ms-3 mb-0 ml-1 text-white">'.$row->pengirim.'</p>
                 </div>
-                <div class="col-10">
-                    <p class="mb-0 ml-1">'.$row->pengirim.'</p>
-                    <div class="card">
-                        <div class="card-body p-1">
-                            <p class="mb-0 ml-1">'.$row->ucapan.'</p>
+            </div>
+            <div class="row mb-2 ms-3">
+                <div class="col d-flex">
+                    <img src="/front-end/img/pojok.png" alt="" width="15px" height="9px" class="d-inline border-0">
+                    <div class="card border-0" style="border-radius:0 7px 7px 7px; background-color:#202C33;">
+                        <div class="card-body p-2">
+                            <p class="mb-0 ml-1 fst-italic text-white fs-6">'.$row->ucapan.'</p>
                         </div>
                     </div>
                 </div>

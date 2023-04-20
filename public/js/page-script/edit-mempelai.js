@@ -452,6 +452,8 @@ $(document).ready(function () {
                         success: function (data) {
                             NProgress.done();
                             $('#refresh-gallery').html(data);
+                            $("#photo").val(null)
+                            $("#base64img").val('')
                         }
                     });
                     // $('#modal-invited').modal('hide');

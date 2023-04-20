@@ -3,14 +3,14 @@
 <div class="row mb-2">
     <div class="col">
         @if($data->story == 0)
-            <a href="/story-aktif/{{ $data->slug }}" class="btn btn-success btn-icon-split">
+            <a href="/status/story-aktif/{{ $data->slug }}" class="btn btn-success btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-check"></i>
                 </span>
                 <span class="text">Aktifkan Story</span>
             </a>
         @elseif($data->story == 1)
-        <a href="/story-aktif/{{ $data->slug }}" class="btn btn-danger btn-icon-split">
+        <a href="/status/story-aktif/{{ $data->slug }}" class="btn btn-danger btn-icon-split">
                 <span class="icon text-white-50">
                     <i class="fas fa-times"></i>
                 </span>
@@ -73,7 +73,7 @@
                     </div>
                     <div class="form-group">
                         <label for="story">Kisah</label>
-                        <input type="text" class="form-control" id="story" name="story">
+                        <textarea type="text" class="form-control" id="story" name="story" style="height: 350px"></textarea>
                     </div>
             </div>
             <div class="modal-footer">

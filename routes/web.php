@@ -76,10 +76,11 @@ Route::get('/load-ucapan',[MempelaiController::class, 'reloadUcapan'])->middlewa
 Route::post('/activasi', [MempelaiController::class, 'activasiUndangan'])->middleware('auth');
     // MENAMPILKAN FRONT END (harus paling bawah)
 Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
+Route::get('/{mempelai:slug}/{anything}', [MempelaiController::class, 'name']);
 
 // STORY-------------------------------------------------------------------------------
 Route::resource('/mempelai/{mempelai:slug}/story', StoryController::class)->middleware('auth');
-Route::get('/story-aktif/{mempelai:slug}', [StoryController::class, 'aktif'])->middleware('auth');
+Route::get('/status/story-aktif/{mempelai:slug}', [StoryController::class,'aktif'])->middleware('auth');
 Route::get('/getIdStory/{story:id}', [StoryController::class, 'getIdStory'])->middleware('auth');
 Route::post('/updateStory', [StoryController::class,'update_2'])->middleware('auth');
 Route::post('/deleteStory', [StoryController::class,'delete'])->middleware('auth');

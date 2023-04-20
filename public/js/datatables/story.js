@@ -84,6 +84,7 @@ $(document).ready(function () {
                     // Jika tidak ada pesan error, tampilkan pesan sukses pada form
                     $('#modal-story').modal('hide');
                     $("#tanggal").val('')
+                    $("#story").html('')
                     $("#story").val('')
                     table.ajax.reload()
                     Swal.fire(
@@ -117,7 +118,7 @@ $(document).ready(function () {
                     // console.log(response.success);
                     $(".current-id").html('<input type="hidden" name="id_story" id="id_story" value="'+response.success.id+'">')
                     $("#tanggal").val(response.success.tanggal)
-                    $("#story").val(response.success.story)
+                    $("#story").html(response.success.story)
                     $('#modal-story').modal('show');
                 }
                 

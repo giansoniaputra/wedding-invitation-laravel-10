@@ -23,7 +23,6 @@
         <li class="breadcrumb-item d-none" id="other"><span class="text-info">Lainnya</span></li>
     </ol>
 </nav>
-
 <div class="card" id="data-card">
     <form action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
@@ -98,19 +97,19 @@
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
                     <label for="putra_ke">Putra Ke-</label>
-                    <select class="form-control" id="putra_ke" name="putra_ke" value="{{ $data->putra_ke }}">
+                    <select class="form-control" id="putra_ke" name="putra_ke">
                         <option value="">Pilih...</option>
-                        <option value="Pertama">Pertama</option>
-                        <option value="Kedua">Kedua</option>
-                        <option value="ketiga">ketiga</option>
-                        <option value="Keempat">Keempat</option>
-                        <option value="Kelima">Kelima</option>
-                        <option value="Keenam">Keenam</option>
-                        <option value="Ketujuh">Ketujuh</option>
-                        <option value="Kedelapan">Kedelapan</option>
-                        <option value="Kesembilan">Kesembilan</option>
-                        <option value="Kesepuluh">Kesepuluh</option>
-                        <option value="Kesebelas">Kesebelas</option>
+                        <option value="Pertama" {{ ($data->putra_ke == 'Pertama') ? 'selected' : ''  }}>Pertama</option>
+                        <option value="Kedua" {{ ($data->putra_ke == 'Kedua') ? 'selected' : ''  }}>Kedua</option>
+                        <option value="Ketiga" {{ ($data->putra_ke == 'Ketiga') ? 'selected' : ''  }}>Ketiga</option>
+                        <option value="Keempat" {{ ($data->putra_ke == 'Keempat') ? 'selected' : ''  }}>Keempat</option>
+                        <option value="Kelima" {{ ($data->putra_ke == 'Kelima') ? 'selected' : ''  }}>Kelima</option>
+                        <option value="Keenam" {{ ($data->putra_ke == 'Keenam') ? 'selected' : ''  }}>Keenam</option>
+                        <option value="Ketujuh" {{ ($data->putra_ke == 'Ketujuh') ? 'selected' : ''  }}>Ketujuh</option>
+                        <option value="Kedelapan" {{ ($data->putra_ke == 'Kedelapan') ? 'selected' : ''  }}>Kedelapan</option>
+                        <option value="Kesembilan" {{ ($data->putra_ke == 'Kesembilan') ? 'selected' : ''  }}>Kesembilan</option>
+                        <option value="Kesepuluh" {{ ($data->putra_ke == 'Kesepuluh') ? 'selected' : ''  }}>Kesepuluh</option>
+                        <option value="Kesebelas" {{ ($data->putra_ke == 'Kesebelas') ? 'selected' : ''  }}>Kesebelas</option>
                     </select>
                 </div>
             </div>
@@ -135,19 +134,19 @@
             <div class="row d-flex flex-column align-items-center text-center mb-3">
                 <div class="col-sm-4">
                     <label for="putri_ke">Putri Ke-</label>
-                    <select class="form-control" id="putri_ke" name="putri_ke" value="{{ $data->putri_ke }}">
+                    <select class="form-control" id="putri_ke" name="putri_ke">
                         <option value="">Pilih...</option>
-                        <option value="Pertama">Pertama</option>
-                        <option value="Kedua">Kedua</option>
-                        <option value="ketiga">ketiga</option>
-                        <option value="Keempat">Keempat</option>
-                        <option value="Kelima">Kelima</option>
-                        <option value="Keenam">Keenam</option>
-                        <option value="Ketujuh">Ketujuh</option>
-                        <option value="Kedelapan">Kedelapan</option>
-                        <option value="Kesembilan">Kesembilan</option>
-                        <option value="Kesepuluh">Kesepuluh</option>
-                        <option value="Kesebelas">Kesebelas</option>
+                        <option value="Pertama" {{ ($data->putri_ke == 'Pertama') ? 'selected' : ''  }}>Pertama</option>
+                        <option value="Kedua" {{ ($data->putri_ke == 'Kedua') ? 'selected' : ''  }}>Kedua</option>
+                        <option value="Ketiga" {{ ($data->putri_ke == 'Ketiga') ? 'selected' : ''  }}>Ketiga</option>
+                        <option value="Keempat" {{ ($data->putri_ke == 'Keempat') ? 'selected' : ''  }}>Keempat</option>
+                        <option value="Kelima" {{ ($data->putri_ke == 'Kelima') ? 'selected' : ''  }}>Kelima</option>
+                        <option value="Keenam" {{ ($data->putri_ke == 'Keenam') ? 'selected' : ''  }}>Keenam</option>
+                        <option value="Ketujuh" {{ ($data->putri_ke == 'Ketujuh') ? 'selected' : ''  }}>Ketujuh</option>
+                        <option value="Kedelapan" {{ ($data->putri_ke == 'Kedelapan') ? 'selected' : ''  }}>Kedelapan</option>
+                        <option value="Kesembilan" {{ ($data->putri_ke == 'Kesembilan') ? 'selected' : ''  }}>Kesembilan</option>
+                        <option value="Kesepuluh" {{ ($data->putri_ke == 'Kesepuluh') ? 'selected' : ''  }}>Kesepuluh</option>
+                        <option value="Kesebelas" {{ ($data->putri_ke == 'Kesebelas') ? 'selected' : ''  }}>Kesebelas</option>
                     </select>
                 </div>
             </div>
