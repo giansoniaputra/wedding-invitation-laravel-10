@@ -10,8 +10,8 @@ $(document).ready(function () {
         "serverSide": true,
         "ajax": "dataTablesMempelai",
         "columnDefs": [{
-            "targets": [3,4,5], // index kolom atau sel yang ingin diatur
-            "className": 'text-center' // kelas CSS untuk memposisikan isi ke tengah
+            "targets": [5], // index kolom atau sel yang ingin diatur
+            "className": 'd-flex' // kelas CSS untuk memposisikan isi ke tengah
         }],
         "columns": [{
                 render: function (data, type, row, meta) {

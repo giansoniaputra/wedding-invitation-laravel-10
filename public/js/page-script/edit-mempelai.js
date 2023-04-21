@@ -118,13 +118,12 @@ $(document).ready(function () {
         $("#akad").addClass('d-none')
     })
     $("#btn-back-3").on("click", function () {
-        gallery_card.removeClass("d-none")
-        akad_card.addClass("d-none")
+        akad_card.removeClass("d-none")
         data_card.addClass("d-none")
         other_card.addClass("d-none")
 
-        $("#gallery span").removeClass('text-info')
-        $("#gallery span").addClass('text-white')
+        $("#akad span").removeClass('text-info')
+        $("#akad span").addClass('text-white')
         $("#other").addClass('d-none')
     })
     $("#btn-back-2").on("click", function () {
@@ -244,9 +243,9 @@ $(document).ready(function () {
 
     // Update Data Akad dan REsepsi
     $('#save-akad').on('click', function (e) {
-        $("#gallery").removeClass('d-none')
-        $("#gallery span").removeClass('text-info')
-        $("#gallery span").addClass('text-white')
+        $("#other").removeClass('d-none')
+        $("#other span").removeClass('text-info')
+        $("#other span").addClass('text-white')
         $("#akad span").removeClass('text-white')
         $("#akad span").addClass('text-info')
         NProgress.start();
@@ -276,16 +275,13 @@ $(document).ready(function () {
                 } else {
                     NProgress.done();
                     $("#data-card").addClass("d-none")
-                    $("#gallery-card").removeClass("d-none")
-                    $("#other-card").addClass("d-none")
+                    $("#other-card").removeClass("d-none")
                     $("#akad-card").addClass("d-none")
 
-                    $("#gallery").removeClass("text-info")
-                    $("#gallery").addClass("text-white")
                     $("#data").removeClass("text-white")
                     $("#data").addClass("text-info")
-                    $("#other").removeClass("text-white")
-                    $("#other").addClass("text-info")
+                    $("#other").removeClass("text-info")
+                    $("#other").addClass("text-white")
                     $("#akad").removeClass("text-white")
                     $("#akad").addClass("text-info")
                     document.location.href = "#"

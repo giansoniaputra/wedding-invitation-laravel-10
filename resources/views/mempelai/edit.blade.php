@@ -19,7 +19,6 @@
     <ol class="breadcrumb bg-dark">
         <li class="breadcrumb-item" id="data"><span class="text-white">Data Mempelai</span></li>
         <li class="breadcrumb-item d-none" id="akad"><span class="text-info">Akad dan Resepsi</span></li>
-        <li class="breadcrumb-item d-none" id="gallery"><span class="text-info">Gallery</span></li>
         <li class="breadcrumb-item d-none" id="other"><span class="text-info">Lainnya</span></li>
     </ol>
 </nav>
@@ -45,27 +44,6 @@
                             value="{{ $data->nama_wanita }}">
                     </div>
                 </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <div class="col-sm-4">
-                    <label for="photo_pria" class="form-label">Foto Pria</label>
-                    <input type="file" class="form-control" name="photo_pria" id="photo_pria">
-                    <input type="hidden" name="fotoPria" id="fotoPria" value="{{ $data->photo_pria }}">
-                </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <img src="{{ $data->photo_pria }}" alt="" class="img-fluid show-foto-pria" width="200px">
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <div class="col-sm-4">
-                    <label for="photo_wanita" class="form-label">Foto Wanita</label>
-                    <input type="file" class="form-control" name="photo_wanita" id="photo_wanita"
-                        onchange="photoWanita(this)">
-                    <input type="hidden" name="fotoWanita" id="fotoWanita" value="{{ $data->photo_wanita }}">
-                </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center" id="show-foto-wanita">
-                <img src="{{ $data->photo_wanita }}" alt="" class="img-fluid show-foto-wanita" width="200px">
             </div>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
@@ -201,6 +179,7 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->roles == 'admin')
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -210,6 +189,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -245,6 +225,7 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->roles == 'admin')
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -254,6 +235,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -278,63 +260,6 @@
                         <span class="text">Selanjutnya</span>
                     </button>
                 </div>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="card d-none" id="gallery-card">
-    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)">
-        @csrf
-        <input type="hidden" name="id" value="{{ $data->id }}">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="mb-3">
-                        <label for="photo" class="form-label">Name</label>
-                        <input type="file" class="form-control" name="photo" id="photo">
-                        <input type="hidden" id="base64img" name="base64img">
-                    </div>
-                    <button type="button" class="btn btn-success btn-icon-split ml-2" id="save-photo">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="refresh-gallery">
-            <div class="col">
-                <div class="card m-4">
-                    <h1 class="h1 text-center">Gallery</h1>
-                    <hr>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @foreach($photos as $photo)
-                                    <img width="200px" class="img-fluid" src="{{ $photo->photo }}" alt="gallery">
-                                    <button type="button" class="btn btn-danger btn-sm btn-hapus-foto"
-                                        data-id="{{ $photo->id }}" data-mempelai_id="{{ $photo->mempelai_id }}"><i
-                                            class="fas fa-trash"></i></button>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12 d-flex justify-content-end">
-                <button type="button" class="btn btn-warning btn-icon-split mb-4" id="btn-back-2">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-backward"></i>
-                    </span>
-                    <span class="text">Kembali</span>
-                </button>
-                <button type="submit" class="btn btn-primary btn-icon-split ml-2 mr-4 mb-4" id="save-gallery">
-                    <span class="icon text-white-50">
-                        <i class="fas fa-forward"></i>
-                    </span>
-                    <span class="text">Selanjutnya</span>
-                </button>
             </div>
         </div>
     </form>

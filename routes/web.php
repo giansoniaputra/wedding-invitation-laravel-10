@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\StoryController;
 use App\Http\Controllers\MempelaiController;
 
@@ -74,15 +75,25 @@ Route::get('/load-content',[MempelaiController::class, 'reloadGallery'])->middle
 Route::get('/load-ucapan',[MempelaiController::class, 'reloadUcapan'])->middleware('auth');
     // AKTIVASI
 Route::post('/activasi', [MempelaiController::class, 'activasiUndangan'])->middleware('auth');
-    // MENAMPILKAN FRONT END (harus paling bawah)
-Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
-Route::get('/{mempelai:slug}/{anything}', [MempelaiController::class, 'name']);
+// PHOTO
+    //Mempelai
+Route::get('/editPhotoMempelai/{slug}', [PhotoController::class, 'edit_photo_mempelai'])->middleware('auth');
+Route::get('/editPhotoMempelai/upload-photo-mempelai', [PhotoController::class, 'upload-photo-mempelai'])->middleware('auth');
+Route::post('/updatePhoto', [PhotoController::class, 'update_photo'])->middleware('auth');
+    //Gallery
+Route::get('/gallery/{slug}', [PhotoController::class, 'page_gallery'])->middleware('auth');
+Route::post('/upload-gallery/{slug}', [PhotoController::class, 'page_upload'])->middleware('auth');
+Route::post('/delete-photo/{slug}', [PhotoController::class, 'delete_photo'])->middleware('auth');
 
-// STORY-------------------------------------------------------------------------------
+    // STORY-------------------------------------------------------------------------------
 Route::resource('/mempelai/{mempelai:slug}/story', StoryController::class)->middleware('auth');
 Route::get('/status/story-aktif/{mempelai:slug}', [StoryController::class,'aktif'])->middleware('auth');
 Route::get('/getIdStory/{story:id}', [StoryController::class, 'getIdStory'])->middleware('auth');
 Route::post('/updateStory', [StoryController::class,'update_2'])->middleware('auth');
 Route::post('/deleteStory', [StoryController::class,'delete'])->middleware('auth');
+    // MENAMPILKAN FRONT END (harus paling bawah)
+Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
+Route::get('/{mempelai:slug}/{anything}', [MempelaiController::class, 'name']);
+
 
 

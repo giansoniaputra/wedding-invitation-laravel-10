@@ -128,6 +128,7 @@ class MempelaiController extends Controller
         Invited::where('mempelai_id', $data->id)->delete();
         Photo::where('mempelai_id', $data->id)->delete();
         Ucapan::where('mempelai_id', $data->id)->delete();
+        Story::where('mempelai_id', $data->id)->delete();
 
         return redirect('/mempelai')->with(['success' => 'Data Berhasil Dihapus']);
 
@@ -138,8 +139,6 @@ class MempelaiController extends Controller
         $rules = [
             'nama_pria' =>   'required',
             'nama_wanita' => 'required',
-            'fotoPria' => 'required',
-            'fotoWanita' => 'required',
             'ibu_pria' => 'required',
             'bapak_pria' => 'required',
             'ibu_wanita' => 'required',
@@ -150,8 +149,6 @@ class MempelaiController extends Controller
         $pesan = [
             'nama_pria.required' => 'Tidak Boleh Kosong!',
             'nama_wanita.required' => 'Tidak Boleh Kosong!',
-            'fotoPria.required' => 'Tidak Boleh Kosong!',
-            'fotoWanita.required' => 'Tidak Boleh Kosong!',
             'ibu_pria.required' => 'Tidak Boleh Kosong!.',
             'bapak_pria.required' => 'Tidak Boleh Kosong!.',
             'ibu_wanita.required' => 'Tidak Boleh Kosong!',
@@ -172,8 +169,6 @@ class MempelaiController extends Controller
                 'bapak_pria' => $request->bapak_pria,
                 'ibu_wanita' => $request->ibu_wanita,
                 'bapak_wanita' => $request->bapak_wanita,
-                'photo_pria' => $request->fotoPria,
-                'photo_wanita' => $request->fotoWanita,
                 'putra_ke' => $request->putra_ke,
                 'putri_ke' => $request->putri_ke,
             ];
@@ -187,10 +182,8 @@ class MempelaiController extends Controller
         $rules = [
             'tanggal_akad' =>   'required',
             'alamat_akad' => 'required',
-            'map_akad' => 'required',
             'tanggal_resepsi' => 'required',
             'alamat_resepsi' => 'required',
-            'map_resepsi' => 'required',
             'waktu_akad' => 'required',
             'waktu_resepsi' => 'required',
             'link_akad' => 'required',
@@ -199,10 +192,8 @@ class MempelaiController extends Controller
         $pesan = [
             'tanggal_akad.required' => 'Tidak Boleh Kosong!',
             'alamat_akad.required' => 'Tidak Boleh Kosong!',
-            'map_akad.required' => 'Tidak Boleh Kosong!.',
             'tanggal_resepsi.required' => 'Tidak Boleh Kosong!.',
             'alamat_resepsi.required' => 'Tidak Boleh Kosong!',
-            'map_resepsi.required' => 'Tidak Boleh Kosong!',
             'waktu_akad.required' => 'Tidak Boleh Kosong!',
             'waktu_resepsi.required' => 'Tidak Boleh Kosong!',
             'link_akad.required' => 'Tidak Boleh Kosong!',
@@ -277,14 +268,15 @@ class MempelaiController extends Controller
                     if($row->activation == 0){
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
-                        <form action="/activasi" method="post" class="d-inline">
+                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                        <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
                         <input type="hidden" name="id" value="'.$row->id.'">
                         <button type="submit" class="btn btn-success btn-sm delete-button"><i class="fas fa-check"></i></button>
                         </form>
-                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline ml-1">
                             <input type="hidden" name="_token" value="'.csrf_token().'">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="id" value="'.$row->id.'">
@@ -294,14 +286,15 @@ class MempelaiController extends Controller
                     }else {
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
-                        <form action="/activasi" method="post" class="d-inline">
+                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                        <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
                         <input type="hidden" name="id" value="'.$row->id.'">
-                        <button type="submit" class="btn btn-danger btn-sm delete-button"><i class="fas fa-times"></i></button>
+                        <button type="submit" class="btn btn-danger btn-sm delete-button"><i class="fas fa-ban"></i></button>
                         </form>
-                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                        <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline ml-1">
                             <input type="hidden" name="_token" value="'.csrf_token().'">
                             <input type="hidden" name="_method" value="DELETE">
                             <input type="hidden" name="id" value="'.$row->id.'">
@@ -331,14 +324,15 @@ class MempelaiController extends Controller
                 return DataTables::of($data)->addColumn('action', function($row){
                     $actionBtn = 
                     '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button"><i class="fas fa-edit"></i></a>
-                     <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button"><i class="fas fa-heart"></i></a>
-                     <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline">
+                     <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
+                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                     <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                     <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline ml-1">
                          <input type="hidden" name="_token" value="'.csrf_token().'">
                          <input type="hidden" name="_method" value="DELETE">
                          <input type="hidden" name="id" value="'.$row->id.'">
                          <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(\'Apakah Anda Yakin?\')"><i class="fas fa-trash"></i></button>
-                         </form>
+                    </form>
                      ';
                     return $actionBtn;
                 })->addColumn('status', function ($row){
