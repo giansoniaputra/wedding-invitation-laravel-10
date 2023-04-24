@@ -43,10 +43,11 @@
                     <div class="row">
                         <div class="col-sm-12">
                             @foreach($photos as $photo)
-                                <img width="200px" class="img-fluid" src="{{ $photo->photo }}" alt="gallery">
+                                <img width="200px" class="img-fluid" src="/storage/post-images/gallery/{{ $photo->photo }}" alt="gallery">
                                 <form action="/delete-photo/{{ $photo->id }}" method="POST" class="d-inline">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $photo->id }}">
+                                    <input type="hidden" name="photo" value="{{ 'post-images/gallery/'.$photo->photo }}">
                                     <button type="submit" class="btn btn-danger btn-sm btn-hapus-foto"><i class="fas fa-trash"></i></button>
                                 </form>
                             @endforeach

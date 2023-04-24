@@ -11,12 +11,14 @@
     <form action="/updatePhoto" method="post" enctype="multipart/form-data">
         @csrf
         <input type="hidden" name="id" value="{{ $data->id }}">
+        <input type="hidden" name="oldImagePria" value="{{ 'post-images/mempelai/'.$data->photo_pria }}">
+        <input type="hidden" name="oldImageWanita" value="{{ 'post-images/mempelai/'.$data->photo_wanita }}">
         <div class="card-body">
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
                     <label for="photo_pria" class="form-label">Photo Pria</label>
                     <input type="file" class="form-control @error('photo_pria') is-invalid @enderror" name="photo_pria" id="photo_pria">
-                    <input type="text" name="fotoPria" id="fotoPria" value="{{ old('fotoPria') }}">
+                    <input type="hidden" name="fotoPria" id="fotoPria" value="{{ old('fotoPria') }}">
                     @error('photo_pria')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -25,7 +27,7 @@
                 </div>
             </div>
             <div class="row d-flex flex-column align-items-center text-center" id="show-foto-pria">
-                <img src="{{ old('fotoPria', $data->photo_pria) }}" alt="" class="img-fluid show-foto-pria" width="200px">
+                <img src="{{ old('fotoPria', '/storage/post-images/mempelai/'.$data->photo_pria) }}" alt="" class="img-fluid show-foto-pria" width="200px">
             </div>
         </div>
         <div class="card-body">
@@ -33,7 +35,7 @@
                 <div class="col-sm-4">
                     <label for="photo_wanita" class="form-label">Photo Wainta</label>
                     <input type="file" class="form-control @error('photo_wanita') is-invalid @enderror" name="photo_wanita" id="photo_wanita">
-                    <input type="text" name="fotoWanita" id="fotoWanita" value="{{ old('fotoWanita') }}">
+                    <input type="hidden" name="fotoWanita" id="fotoWanita" value="{{ old('fotoWanita') }}">
                     @error('photo_wanita')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -42,7 +44,7 @@
                 </div>
             </div>
             <div class="row d-flex flex-column align-items-center text-center" id="show-foto-wanita">
-                <img src="{{ old('fotoWanita', $data->photo_wanita) }}" alt="" class="img-fluid show-foto-wanita" width="200px">
+                <img src="{{ old('fotoWanita', '/storage/post-images/mempelai/'.$data->photo_wanita) }}" alt="" class="img-fluid show-foto-wanita" width="200px">
             </div>
         </div>
         <div class="card-body">

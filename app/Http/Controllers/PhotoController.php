@@ -4,7 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Photo;
 use App\Models\Mempelai;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class PhotoController extends Controller
@@ -102,8 +107,37 @@ class PhotoController extends Controller
                 'photo_wanita.max' => 'Gambar Minimal Berukuran 2MB',
             ]);
         }
+
         $slug = Mempelai::where('id', $request->id)->first();
-        Mempelai::where('slug', $slug->slug)->update(['photo_pria' => $request->fotoPria, 'photo_wanita' => $request->fotoWanita]);
+
+        $imagePria = $request->fotoPria;  // your base64 encoded
+        $imagePria = str_replace('data:image/png;base64,', '', $imagePria);
+        $imagePria = str_replace(' ', '+', $imagePria);
+        $imageNamePria = Str::random(40).'.'.'png';
+        File::put(storage_path(). '/app/public/post-images/mempelai/' . $imageNamePria, base64_decode($imagePria));
+
+        $imageWanita = $request->fotoWanita;  // your base64 encoded
+        $imageWanita = str_replace('data:image/png;base64,', '', $imageWanita);
+        $imageWanita = str_replace(' ', '+', $imageWanita);
+        $imageNameWanita = Str::random(40).'.'.'png';
+        File::put(storage_path(). '/app/public/post-images/mempelai/' . $imageNameWanita, base64_decode($imageWanita));
+
+        $data2 = [
+            'photo_pria' => $imageNamePria,
+            'photo_wanita' => $imageNameWanita,
+        ];
+
+        if($slug->photo_pria != 'img/mempelai/' && $slug->photo_wanita != 'img/mempelai/')
+        {
+            // if(file_exists($request->photo_pria) && file_exists($request->photo_wanita)){
+            //     unlink(public_path().'/img/mempelai/'.$request->oldImagePria);
+            //     unlink(public_path().'/img/mempelai/'.$request->oldImageWanita);
+            // }
+            Storage::delete($request->oldImagePria);
+            Storage::delete($request->oldImageWanita);
+        }
+        Mempelai::where('slug', $slug->slug)->update($data2);
+        
         return redirect('editPhotoMempelai/'.$slug->slug)->with('success', 'Gambar Berhasil Diperbaharui');
     }
 
@@ -130,9 +164,16 @@ class PhotoController extends Controller
             'photo.max' => 'Gambar Minimal Berukuran 2MB',
         ]);
         $slug = Mempelai::where('id', $request->id)->first();
+
+        $imageGallery = $request->base64img;  // your base64 encoded
+        $imageGallery = str_replace('data:image/png;base64,', '', $imageGallery);
+        $imageGallery = str_replace(' ', '+', $imageGallery);
+        $imageNameGallery = Str::random(40).'.'.'png';
+        File::put(storage_path(). '/app/public/post-images/gallery/' . $imageNameGallery, base64_decode($imageGallery));
+
         $data = [
             'mempelai_id' => $request->id,
-            'photo' => $request->base64img,
+            'photo' => $imageNameGallery,
         ];
         Photo::create($data);
         return redirect('gallery/'.$slug->slug)->with('success', 'Gambar Berhasil Ditambahkan ke Gallery');
@@ -140,7 +181,9 @@ class PhotoController extends Controller
 
     public function delete_photo(Request $request)
     {
+        
         Photo::where('id', $request->id)->delete();
+        Storage::delete($request->photo);
         return back()->with('success', 'Gambar Berhasil Dihapus');
     }
 }

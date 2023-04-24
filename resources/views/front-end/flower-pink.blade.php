@@ -120,14 +120,14 @@
                 <!-- Gambar -->
                 <div class="row text-center">
                     <div id="img-pria" class="col-5">
-                        <img width="120px" src="{{ $mempelai->photo_pria }}"
+                        <img width="120px" src="/storage/post-images/mempelai/{{ $mempelai->photo_pria }}"
                             class="img-thumbnail rounded-circle foto-pria" alt="">
                     </div>
                     <div id="img-love" class="col-2 d-flex justify-content-center align-items-center">
                         <img src="/front-end/img/love.png" alt="" class="mx-2 img-fluid love">
                     </div>
                     <div id="img-wanita" class="col-5">
-                        <img width="120px" src="{{ $mempelai->photo_wanita }}"
+                        <img width="120px" src="/storage/post-images/mempelai/{{ $mempelai->photo_wanita }}"
                             class="img-thumbnail rounded-circle foto-wanita" alt="">
                     </div>
                 </div>
@@ -429,7 +429,7 @@
                         <div class="col-6 mb-3">
                             <div>
                                 <div class="kartu2 foto">
-                                    <img src="{{ $photo->photo }}" alt="" class="img-fluid rounded">
+                                    <img src="/storage/post-images/gallery/{{ $photo->photo }}" alt="" class="img-fluid rounded">
                                 </div>
                             </div>
                         </div>
