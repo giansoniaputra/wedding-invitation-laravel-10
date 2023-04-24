@@ -24,14 +24,14 @@
     background-image: url('/front-end/img/bg.png');
 }
 #judul {
-    animation: topToBottom 1s ease-in-out;
+    animation: topToBottom 2s ease-in-out;
 }
 #bunga {
-    animation: bunga 1s ease-in-out;
+    animation: bunga 2s ease-in-out;
 }
 
 #nama-mempelai {
-    animation: namaMempelai 2s ease-in-out;
+    animation: namaMempelai 3s ease-in-out;
 }
 
 /* MEMPELAI */
@@ -98,21 +98,21 @@
 }
 
 /* WAKTU */
-#waktu, #gallery, #doa {
+#waktu, #gallery, #doa, #story, #protokol {
     background-image: url('/front-end/img/bg.png') !important;
     background-size: cover;
 }
 
 /* DAY */
 
-#day, #hari, #tanggal, #bulan, #tahun, #hari-s, #tanggal-s, #bulan-s, #tahun-s, #pukul, #maps, #resepsi, #hari-r, #tanggal-r, #bulan-r, #tahun-r, #hari-sr, #tanggal-sr, #bulan-sr, #tahun-sr, #pukul-r, #maps-r, #countdown, #judul-2, #foto {
+#day, #hari, #tanggal, #bulan, #tahun, #hari-s, #tanggal-s, #bulan-s, #tahun-s, #pukul, #maps, #resepsi, #hari-r, #tanggal-r, #bulan-r, #tahun-r, #hari-sr, #tanggal-sr, #bulan-sr, #tahun-sr, #pukul-r, #maps-r, #countdown, #judul-2, .foto, .judul-history, .judul-story, .card-story, .tanggal-story ,.card-text-story {
     opacity: 0;
 }
 /* FOOTER */
 footer {
     box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);
     height: 250px;
-    background-color: #3B486D;
+    background-color: rgb(59, 72, 109);
 }
 
 footer a{

@@ -10,8 +10,8 @@ $(document).ready(function () {
         "serverSide": true,
         "ajax": "dataTablesMempelai",
         "columnDefs": [{
-            "targets": [3], // index kolom atau sel yang ingin diatur
-            "className": 'text-center' // kelas CSS untuk memposisikan isi ke tengah
+            "targets": [5], // index kolom atau sel yang ingin diatur
+            "className": 'd-flex' // kelas CSS untuk memposisikan isi ke tengah
         }],
         "columns": [{
                 render: function (data, type, row, meta) {
@@ -26,6 +26,11 @@ $(document).ready(function () {
             },
             {
                 "data": "name"
+            },
+            {
+                "data": "status",
+                "orderable": true,
+                "searchable": true
             },
             {
                 "data": "action",
@@ -61,6 +66,7 @@ $(document).ready(function () {
     })
     // ACTION SAVE
     $('.btn-save').on('click', function (e) {
+        NProgress.start();
         var formdata = $("#modal-mempelai form").serializeArray();
         var data = {};
         $(formdata).each(function (index, obj) {
@@ -74,9 +80,11 @@ $(document).ready(function () {
             success: function (response) {
                 // console.log(data);
                 if (response.errors) {
+                    NProgress.done();
                     // Jika ada pesan error, tampilkan pesan error pada form
                     displayErrors(response.errors);
                 } else {
+                    NProgress.done();
                     // Jika tidak ada pesan error, tampilkan pesan sukses pada form
                     $('#modal-mempelai').modal('hide');
                     table.ajax.reload()

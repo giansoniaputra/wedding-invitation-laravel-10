@@ -17,13 +17,11 @@
 </style>
 <nav>
     <ol class="breadcrumb bg-dark">
-        <li class="breadcrumb-item"><a href="javascript:;" id="data" class="text-white">Data Mempelai</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="akad" class="text-info">Akad dan Resepsi</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="gallery" class="text-info">Gallery</a></li>
-        <li class="breadcrumb-item"><a href="javascript:;" id="other" class="text-info">Lainnya</a></li>
+        <li class="breadcrumb-item" id="data"><span class="text-white">Data Mempelai</span></li>
+        <li class="breadcrumb-item d-none" id="akad"><span class="text-info">Akad dan Resepsi</span></li>
+        <li class="breadcrumb-item d-none" id="other"><span class="text-info">Lainnya</span></li>
     </ol>
 </nav>
-
 <div class="card" id="data-card">
     <form action="javascript:void(0)" enctype="multipart/form-data">
         @csrf
@@ -46,27 +44,6 @@
                             value="{{ $data->nama_wanita }}">
                     </div>
                 </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <div class="col-sm-4">
-                    <label for="photo_pria" class="form-label">Foto Pria</label>
-                    <input type="file" class="form-control" name="photo_pria" id="photo_pria">
-                    <input type="hidden" name="fotoPria" id="fotoPria" value="{{ $data->photo_pria }}">
-                </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <img src="{{ $data->photo_pria }}" alt="" class="img-fluid show-foto-pria" width="200px">
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center">
-                <div class="col-sm-4">
-                    <label for="photo_wanita" class="form-label">Foto Wanita</label>
-                    <input type="file" class="form-control" name="photo_wanita" id="photo_wanita"
-                        onchange="photoWanita(this)">
-                    <input type="hidden" name="fotoWanita" id="fotoWanita" value="{{ $data->photo_wanita }}">
-                </div>
-            </div>
-            <div class="row d-flex flex-column align-items-center text-center" id="show-foto-wanita">
-                <img src="{{ $data->photo_wanita }}" alt="" class="img-fluid show-foto-wanita" width="200px">
             </div>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
@@ -97,6 +74,25 @@
             </div>
             <div class="row d-flex flex-column align-items-center text-center">
                 <div class="col-sm-4">
+                    <label for="putra_ke">Putra Ke-</label>
+                    <select class="form-control" id="putra_ke" name="putra_ke">
+                        <option value="">Pilih...</option>
+                        <option value="Pertama" {{ ($data->putra_ke == 'Pertama') ? 'selected' : ''  }}>Pertama</option>
+                        <option value="Kedua" {{ ($data->putra_ke == 'Kedua') ? 'selected' : ''  }}>Kedua</option>
+                        <option value="Ketiga" {{ ($data->putra_ke == 'Ketiga') ? 'selected' : ''  }}>Ketiga</option>
+                        <option value="Keempat" {{ ($data->putra_ke == 'Keempat') ? 'selected' : ''  }}>Keempat</option>
+                        <option value="Kelima" {{ ($data->putra_ke == 'Kelima') ? 'selected' : ''  }}>Kelima</option>
+                        <option value="Keenam" {{ ($data->putra_ke == 'Keenam') ? 'selected' : ''  }}>Keenam</option>
+                        <option value="Ketujuh" {{ ($data->putra_ke == 'Ketujuh') ? 'selected' : ''  }}>Ketujuh</option>
+                        <option value="Kedelapan" {{ ($data->putra_ke == 'Kedelapan') ? 'selected' : ''  }}>Kedelapan</option>
+                        <option value="Kesembilan" {{ ($data->putra_ke == 'Kesembilan') ? 'selected' : ''  }}>Kesembilan</option>
+                        <option value="Kesepuluh" {{ ($data->putra_ke == 'Kesepuluh') ? 'selected' : ''  }}>Kesepuluh</option>
+                        <option value="Kesebelas" {{ ($data->putra_ke == 'Kesebelas') ? 'selected' : ''  }}>Kesebelas</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row d-flex flex-column align-items-center text-center">
+                <div class="col-sm-4">
                     <div class="mb-3">
                         <label for="ibu_wanita" class="form-label">Nama Ibu Wanita</label>
                         <input type="text" class="form-control" name="ibu_wanita" id="ibu_wanita"
@@ -111,6 +107,25 @@
                         <input type="text" class="form-control" name="bapak_wanita" id="bapak_wanita"
                             value="{{ $data->bapak_wanita }}">
                     </div>
+                </div>
+            </div>
+            <div class="row d-flex flex-column align-items-center text-center mb-3">
+                <div class="col-sm-4">
+                    <label for="putri_ke">Putri Ke-</label>
+                    <select class="form-control" id="putri_ke" name="putri_ke">
+                        <option value="">Pilih...</option>
+                        <option value="Pertama" {{ ($data->putri_ke == 'Pertama') ? 'selected' : ''  }}>Pertama</option>
+                        <option value="Kedua" {{ ($data->putri_ke == 'Kedua') ? 'selected' : ''  }}>Kedua</option>
+                        <option value="Ketiga" {{ ($data->putri_ke == 'Ketiga') ? 'selected' : ''  }}>Ketiga</option>
+                        <option value="Keempat" {{ ($data->putri_ke == 'Keempat') ? 'selected' : ''  }}>Keempat</option>
+                        <option value="Kelima" {{ ($data->putri_ke == 'Kelima') ? 'selected' : ''  }}>Kelima</option>
+                        <option value="Keenam" {{ ($data->putri_ke == 'Keenam') ? 'selected' : ''  }}>Keenam</option>
+                        <option value="Ketujuh" {{ ($data->putri_ke == 'Ketujuh') ? 'selected' : ''  }}>Ketujuh</option>
+                        <option value="Kedelapan" {{ ($data->putri_ke == 'Kedelapan') ? 'selected' : ''  }}>Kedelapan</option>
+                        <option value="Kesembilan" {{ ($data->putri_ke == 'Kesembilan') ? 'selected' : ''  }}>Kesembilan</option>
+                        <option value="Kesepuluh" {{ ($data->putri_ke == 'Kesepuluh') ? 'selected' : ''  }}>Kesepuluh</option>
+                        <option value="Kesebelas" {{ ($data->putri_ke == 'Kesebelas') ? 'selected' : ''  }}>Kesebelas</option>
+                    </select>
                 </div>
             </div>
             <div class="row">
@@ -164,6 +179,7 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->roles == 'admin')
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -173,6 +189,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -208,6 +225,7 @@
                     </div>
                 </div>
             </div>
+            @if (auth()->user()->roles == 'admin')
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -217,6 +235,7 @@
                     </div>
                 </div>
             </div>
+            @endif
             <div class="row d-flex flex-column align-items-center text-center d-flex">
                 <div class="col-sm-4">
                     <div class="mb-3">
@@ -240,49 +259,6 @@
                         </span>
                         <span class="text">Selanjutnya</span>
                     </button>
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="card d-none" id="gallery-card">
-    <form onSubmit="JavaScript:submitHandler()" action="javascript:void(0)">
-        @csrf
-        <input type="hidden" name="id" value="{{ $data->id }}">
-        <div class="card-body">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="mb-3">
-                        <label for="photo" class="form-label">Name</label>
-                        <input type="file" class="form-control" name="photo" id="photo">
-                        <input type="hidden" id="base64img" name="base64img">
-                    </div>
-                    <button type="button" class="btn btn-success btn-icon-split ml-2" id="save-photo">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Tambah</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div class="row" id="refresh-gallery">
-            <div class="col">
-                <div class="card m-4">
-                    <h1 class="h1 text-center">Gallery</h1>
-                    <hr>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-sm-12">
-                                @foreach($photos as $photo)
-                                    <img width="200px" class="img-fluid" src="{{ $photo->photo }}" alt="gallery">
-                                    <button type="button" class="btn btn-danger btn-sm btn-hapus-foto"
-                                        data-id="{{ $photo->id }}" data-mempelai_id="{{ $photo->mempelai_id }}"><i
-                                            class="fas fa-trash"></i></button>
-                                @endforeach
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

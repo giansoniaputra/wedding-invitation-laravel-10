@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    $("#audio")[0].autoplay = true
     // Atur waktu akhir hitung mundur (YYYY/MM/DD HH:MM:SS)
     let tanggal = document.getElementById('tanggal_akad_db').value;
     let waktu = document.getElementById('waktu_akad_db').value;
@@ -39,4 +40,17 @@ $(document).ready(function () {
 
     document.getElementById("waktuBaru").innerHTML = waktuBaru[0]+':'+waktuBaru[1];
     document.getElementById("waktu_res").innerHTML = waktuResepsiBaru[0]+':'+waktuResepsiBaru[1];
+
+    $("#pause").on('click', function() {
+        $("#audio")[0].pause();
+        $("#pause").addClass('d-none');
+        $("#play").removeClass('d-none');
+    })
+    $("#play").on('click', function() {
+        $("#audio")[0].play();
+        $("#play").addClass('d-none');
+        $("#pause").removeClass('d-none');
+    })
+
+    
 });

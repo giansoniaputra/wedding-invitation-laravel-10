@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -25,5 +26,10 @@ class Mempelai extends Model
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+    public function getCreatedAtAttribute()
+    {   
+        return Carbon::parse($this->attributes['created_at'])->translatedFormat('l, d F Y');
     }
 }
