@@ -68,7 +68,7 @@ Route::post('/deleteInvited', [MempelaiController::class, 'destroyInvited'])->mi
 Route::get('/doneProses', [MempelaiController::class, 'doneProses'])->middleware('auth');
     // Upload Photo
 Route::post('/uploadPhoto', [MempelaiController::class, 'uploadPhoto'])->middleware('auth');
-Route::post('/kirimUcapan', [MempelaiController::class, 'kirimUcapan'])->middleware('auth');
+Route::post('/kirimUcapan', [MempelaiController::class, 'kirimUcapan']);
 Route::get('/deletePhoto', [MempelaiController::class, 'deletePhoto'])->middleware('auth');
 // LOAD SEBAGIAN HALAMAN
 Route::get('/load-content',[MempelaiController::class, 'reloadGallery'])->middleware('auth');
