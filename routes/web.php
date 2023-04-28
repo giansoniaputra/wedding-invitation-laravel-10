@@ -72,7 +72,7 @@ Route::post('/kirimUcapan', [MempelaiController::class, 'kirimUcapan']);
 Route::get('/deletePhoto', [MempelaiController::class, 'deletePhoto'])->middleware('auth');
 // LOAD SEBAGIAN HALAMAN
 Route::get('/load-content',[MempelaiController::class, 'reloadGallery'])->middleware('auth');
-Route::get('/load-ucapan',[MempelaiController::class, 'reloadUcapan'])->middleware('auth');
+Route::get('/load-ucapan',[MempelaiController::class, 'reloadUcapan']);
     // AKTIVASI
 Route::post('/activasi', [MempelaiController::class, 'activasiUndangan'])->middleware('auth');
 // PHOTO
