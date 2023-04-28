@@ -79,7 +79,8 @@
                 <div class="row">
                     <div id="judul" class="col">
                         <h2 class="fw-bold text-center"
-                            style="font-family: 'Pacifico', cursive; color: #3B486D; font-size : 5vmax;">The Wedding
+                            style="font-family: 'Pacifico', cursive; color: white; font-size : 5vmax; text-shadow: 3px 2px 1px black;">
+                            The Wedding
                         </h2>
                     </div>
                 </div>
@@ -88,7 +89,7 @@
                         <img src="/front-end/img/badge.png" class="img-fluid">
                     </div>
                     <div id="nama-mempelai" class="col position-absolute top-50 start-50 translate-middle pt-5">
-                        <h1 class="text-center" style="font-family: 'Dancing Script', cursive;">
+                        <h1 class="text-center text-white fst-bold fs-1" style="font-family: 'Dancing Script', cursive; text-shadow: 3px 2px 1px black;">
                             {{ ucwords(strtolower($mempelai->nama_pria)) }}
                             <br> & <br> {{ ucwords(strtolower($mempelai->nama_wanita)) }}</h1>
                     </div>
@@ -245,8 +246,9 @@
                                     <?= $mempelai->map_akad; ?>
                                     {{-- Link Google Map --}}
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ $mempelai->link_akad }}" target="_blank"
-                                            class="badge mt-2" style="background-color: rgb(59, 72, 109)"><i data-feather="map" class="me-2"></i>Lihat
+                                        <a href="{{ $mempelai->link_akad }}" target="_blank" class="badge mt-2"
+                                            style="background-color: rgb(59, 72, 109)"><i data-feather="map"
+                                                class="me-2"></i>Lihat
                                             Lokasi</a>
                                     </div>
                                 </div>
@@ -366,8 +368,9 @@
                                     <?= $mempelai->map_resepsi; ?>
                                     {{-- Link Google Map Resepsi --}}
                                     <div class="d-flex justify-content-center align-items-center">
-                                        <a href="{{ $mempelai->link_resepsi }}" target="_blank"
-                                            class="badge mt-2" style="background-color: rgb(59, 72, 109)"><i data-feather="map" class="me-2"></i>Lihat
+                                        <a href="{{ $mempelai->link_resepsi }}" target="_blank" class="badge mt-2"
+                                            style="background-color: rgb(59, 72, 109)"><i data-feather="map"
+                                                class="me-2"></i>Lihat
                                             Lokasi</a>
                                     </div>
                                 </div>
@@ -429,7 +432,8 @@
                         <div class="col-6 mb-3">
                             <div>
                                 <div class="kartu2 foto">
-                                    <img src="/storage/post-images/gallery/{{ $photo->photo }}" alt="" class="img-fluid rounded">
+                                    <img src="/storage/post-images/gallery/{{ $photo->photo }}" alt=""
+                                        class="img-fluid rounded">
                                 </div>
                             </div>
                         </div>
@@ -452,30 +456,49 @@
                             {{-- Nama Pengirim --}}
                             <div class="mb-3">
                                 <label for="nama-pengirim" class="form-label">Nama Pengirim</label>
-                                <input type="text" class="form-control" id="nama-pengirim" name="nama_pengirim">
+                                <input type="text" class="form-control" id="nama-pengirim" name="nama_pengirim"
+                                    placeholder="Masukan Nama Anda">
+                            </div>
+                            {{-- Hadir/Tidak Hadir --}}
+                            <div class="mb-3">
+                                <label for="kehadiran">Kehadiran</label>
+                                <select class="form-control" id="kehadiran" name="kehadiran">
+                                    <option value="">...</option>
+                                    <option value="Hadir">Hadir</option>
+                                    <option value="Belum Pasti">Belum Pasti</option>
+                                    <option value="Tidak Bisa Hadir">Tidak Bisa Hadir</option>
+                                </select>
                             </div>
                             {{-- Pesan dari pengirim --}}
                             <div class="mb-3">
                                 <label for="pesan" class="form-label">Pesan</label>
-                                <input type="text" class="form-control" id="pesan" name="pesan">
+                                <input type="text" class="form-control" id="pesan" name="pesan"
+                                    placeholder="Masukan Pesan Anda">
                             </div>
                             <div class="mt-1 mb-3">
                                 <small class="terkirim text-success fst-italic"></small>
                             </div>
                             {{-- TOmbol Kirim --}}
-                            <button type="submit" class="btn send-ucapan text-white" style="background-color: rgb(59, 72, 109)">Kirim Ucapan</button>
+                            <button type="submit" class="btn send-ucapan text-white"
+                                style="background-color: rgb(59, 72, 109)">Kirim Ucapan</button>
                         </form>
                     </div>
                     {{-- Pengulangan Ucapan --}}
                     <div class="card border-0 p-2" style="height: 300px; overflow: auto;">
                         <div class="card-body rounded refresh"
-                            style="background-image: url('/img/bg-pesan.png'); background-repeat: cover;">
+                            style="background-image: url('/img/bg-pesan.png'); background-repeat: cover; ">
                             @foreach($ucapan as $row)
                                 <div class="row mb-2">
                                     <div class="col d-flex align-items-center">
                                         <img src="/front-end/img/icon/poster.png" alt=""
                                             class="img-fluid rounded-circle" width="30px">
-                                        <p class="ms-3 mb-0 ml-1 text-white">{{ $row->pengirim }}</p>
+                                        <p class="ms-3 mb-0 ml-1 text-white">
+                                            {{ $row->pengirim }} @if($row->kehadiran == 'Hadir') (<small
+                                                class="text-info"><b> Hadir </b></small>) @elseif($row->kehadiran ==
+                                            'Belum Pasti') (<small class="text-warning"><b> Belum Pasti </b></small>)
+                                            @elseif($row->kehadiran == 'Tidak Bisa Hadir') (<small
+                                                class="text-danger"><b> Tidak Bisa Hadir </b></small>) @endif
+                                        </p>
                                     </div>
                                 </div>
                                 <div class="row mb-2 ms-3">
@@ -485,7 +508,8 @@
                                         <div class="card border-0"
                                             style="border-radius:0 7px 7px 7px; background-color:#202C33;">
                                             <div class="card-body p-2">
-                                                <p class="mb-0 ml-1 fst-italic text-white fs-6">{{ $row->ucapan }}</p>
+                                                <small
+                                                    class="mb-0 ml-1 fst-italic text-white">{{ $row->ucapan }}</small>
                                             </div>
                                         </div>
                                     </div>

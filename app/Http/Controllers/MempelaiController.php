@@ -79,9 +79,10 @@ class MempelaiController extends Controller
     }
     public function name(Mempelai $mempelai, $anything)
     {
+        $name = explode('-', $anything);
         $data = [
             'mempelai' => $mempelai,
-            'nama' => $anything,
+            'nama' => ucwords(strtolower(implode(' ', $name))),
         ];
         $templates = Template::where('id', $mempelai->template_id)->first();
         if($templates->template == 'flower-pink'){
@@ -592,10 +593,12 @@ class MempelaiController extends Controller
         $rules = [
             'nama_pengirim' => 'required',
             'pesan' => 'required',
+            'kehadiran' => 'required',
         ];
         $pesan = [
             'nama_pengirim.required' => 'Silahkan Isi Nama Anda.',
             'pesan.required' => 'Silahkan Isi Ucapan Anda.',
+            'kehadiran.required' => 'Silahkan Isi Ucapan Anda.',
         ];
 
         $validator = Validator::make($request->all(),$rules,$pesan);
@@ -606,6 +609,7 @@ class MempelaiController extends Controller
                 'mempelai_id' => $request->id,
                 'ucapan' => $request->pesan,
                 'pengirim' => $request->nama_pengirim,
+                'kehadiran' => $request->kehadiran,
             ];
 
             $pesan_json = [
@@ -625,7 +629,9 @@ class MempelaiController extends Controller
             <div class="row mb-2">
                 <div class="col d-flex align-items-center">
                     <img src="/front-end/img/icon/poster.png" alt="" class="img-fluid rounded-circle" width="30px">
-                    <p class="ms-3 mb-0 ml-1 text-white">'.$row->pengirim.'</p>
+                    <p class="ms-3 mb-0 ml-1 text-white">
+                        '.$row->pengirim; if($row->kehadiran == "Hadir") { echo ' (<small class="text-success"><b> Hadir </b></small>)'; } elseif($row->kehadiran == "Belum Pasti") { echo ' (<small class="text-warning"><b> Belum Pasti </b></small>)'; } elseif($row->kehadiran == "Tidak Bisa Hadir") { echo ' (<small class="text-danger"><b> Tidak Bisa Hadir </b></small>)'; }
+                    echo '</p>
                 </div>
             </div>
             <div class="row mb-2 ms-3">
@@ -633,7 +639,8 @@ class MempelaiController extends Controller
                     <img src="/front-end/img/pojok.png" alt="" width="15px" height="9px" class="d-inline border-0">
                     <div class="card border-0" style="border-radius:0 7px 7px 7px; background-color:#202C33;">
                         <div class="card-body p-2">
-                            <p class="mb-0 ml-1 fst-italic text-white fs-6">'.$row->ucapan.'</p>
+                            <small class="mb-0 ml-1 fst-italic text-white">
+                            '.$row->ucapan.'</small>
                         </div>
                     </div>
                 </div>

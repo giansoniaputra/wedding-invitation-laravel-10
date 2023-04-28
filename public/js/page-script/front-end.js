@@ -71,9 +71,16 @@ $(document).ready(function () {
     $("#nama-pengirim").on("click", function () {
         $("#nama-pengirim").removeClass("is-invalid");
         $("#pesan").removeClass("is-invalid");
+        $("#kehadiran").removeClass("is-invalid");
     })
     $("#pesan").on("click", function () {
         $("#pesan").removeClass("is-invalid");
         $("#nama-pengirim").removeClass("is-invalid");
+        $("#kehadiran").removeClass("is-invalid");
+    })
+    $("#kehadiran").on("click", function () {
+        $("#pesan").removeClass("is-invalid");
+        $("#nama-pengirim").removeClass("is-invalid");
+        $("#kehadiran").removeClass("is-invalid");
     })
 })

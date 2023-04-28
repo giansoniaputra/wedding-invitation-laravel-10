@@ -29,8 +29,9 @@
 
     <style>
         .container-fluid {
-            background-image: url('/front-end/img/bg.png');
+            background-image: url('/front-end/img/cover.png');
             background-size: cover;
+            background-position: center;
             height: 100vh;
         }
         a{
@@ -61,30 +62,30 @@
             <div class="row" style="padding-top: 25vh">
                 <div id="judul-cover" class="col">
                     <h2 class="fw-bold text-center"
-                        style="font-family: 'Pacifico', cursive; color: rgb(59, 72, 109); font-size : 5vmax;">The Wedding
+                        style="font-family: 'Pacifico', cursive; color: white; font-size : 5vmax; text-shadow: 3px 2px 1px black;">The Wedding
                     </h2>
                 </div>
             </div>
             <div class="row" style="margin-top:26vh; font-size:0.8em">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <p class="p-0 fst-italic">Turut Mengundang Bapak/Ibu/Saudara/i</p>
+                    <p class="p-0 fst-italic text-white" style="text-shadow: 3px 2px 1px black;">Turut Mengundang Bapak/Ibu/Saudara/i</p>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="card mx-5 d-flex justify-content-center align-items-center"
-                        style="background-color: rgba(255, 255, 255, 0.308)">
+                    <div class="card d-flex justify-content-center align-items-center"
+                        style="background-color: rgba(255, 255, 255, 0.8); padding: 25px 0">
                         <div class="card-body">
-                            <p class="m-0">{{ $nama }}</p>
+                            <p class="m-0 fs-3" style="font-family: 'Times New Roman', Times, serif; color:black">{{ $nama }}</p>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="row mt-3">
                 <div class="col">
-                    <div class="d-flex justify-content-center align-items-center">
+                    <div class="d-flex justify-content-center align-items-center ">
                         <a href="/{{ $mempelai->slug }}"
-                            class="badge mt-2" style="background-color: rgb(59, 72, 109)"><i data-feather="book-open" class="me-2"></i>Buka Undangan</a>
+                            class="badge mt-2 border-1" style="background-color: white; color: grey"><i data-feather="book-open" class="me-2"></i>Buka Undangan</a>
                     </div>
                 </div>
             </div>
