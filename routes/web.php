@@ -84,6 +84,9 @@ Route::post('/updatePhoto', [PhotoController::class, 'update_photo'])->middlewar
 Route::get('/gallery/{slug}', [PhotoController::class, 'page_gallery'])->middleware('auth');
 Route::post('/upload-gallery/{slug}', [PhotoController::class, 'page_upload'])->middleware('auth');
 Route::post('/delete-photo/{slug}', [PhotoController::class, 'delete_photo'])->middleware('auth');
+    //Cover
+Route::get('/cover/{slug}', [PhotoController::class, 'page_cover'])->middleware('auth');
+Route::post('/updateCover', [PhotoController::class, 'update_cover'])->middleware('auth');
 
     // STORY-------------------------------------------------------------------------------
 Route::resource('/mempelai/{mempelai:slug}/story', StoryController::class)->middleware('auth');

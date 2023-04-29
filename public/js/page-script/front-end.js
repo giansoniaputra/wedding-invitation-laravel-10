@@ -30,7 +30,8 @@ $(document).ready(function () {
                         }
                     });
                     $("#nama-pengirim").val('');
-                    $("#pesan").val('');
+                    $("#pesan").html('');
+                    $("#kehadiran").val('');
                 }
             },
             error: function (xhr) {
@@ -50,6 +51,7 @@ $(document).ready(function () {
         $.each(errors, function (field, messages) {
             var inputElement = $('input[name=' + field + ']');
             var selectElement = $('select[name=' + field + ']');
+            var textAreaElement = $('textarea[name=' + field + ']');
             var feedbackElement = $('<div class="invalid-feedback"></div>');
 
             $.each(messages, function (index, message) {
@@ -64,6 +66,10 @@ $(document).ready(function () {
             if (selectElement.length > 0) {
                 selectElement.addClass('is-invalid');
                 selectElement.after(feedbackElement);
+            }
+            if (textAreaElement.length > 0) {
+                textAreaElement.addClass('is-invalid');
+                textAreaElement.after(feedbackElement);
             }
         });
     }

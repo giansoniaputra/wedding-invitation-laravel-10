@@ -86,25 +86,25 @@ class PhotoController extends Controller
         
         if($request->fotoPria || $request->fotoWanita){
             $rules = $request->validate([
-                'photo_pria' => 'image|file|max:2048',
-                'photo_wanita' => 'image|file|max:2048',
+                'photo_pria' => 'image|file|max:5120',
+                'photo_wanita' => 'image|file|max:5120',
             ],[
                 'photo_pria.image' => 'File Harus Berupa Gambar',
                 'photo_wanita.image' => 'File Harus Berupa Gambar',
-                'photo_pria.max' => 'Gambar Minimal Berukuran 2MB',
-                'photo_wanita.max' => 'Gambar Minimal Berukuran 2MB',
+                'photo_pria.max' => 'Gambar Minimal Berukuran 5MB',
+                'photo_wanita.max' => 'Gambar Minimal Berukuran 5MB',
             ]);
         } else if(!$request->fotoPria || !$request->fotoWanita) {
             $rules = $request->validate([
-                'photo_pria' => 'required|image|file|max:2048',
-                'photo_wanita' => 'required|image|file|max:2048',
+                'photo_pria' => 'required|image|file|max:5120',
+                'photo_wanita' => 'required|image|file|max:5120',
             ],[
                 'photo_pria.required' => 'Gambar Tidak Boleh Kosong',
                 'photo_wanita.required' => 'Gambar Tidak Boleh Kosong',
                 'photo_pria.image' => 'File Harus Berupa Gambar',
                 'photo_wanita.image' => 'File Harus Berupa Gambar',
-                'photo_pria.max' => 'Gambar Minimal Berukuran 2MB',
-                'photo_wanita.max' => 'Gambar Minimal Berukuran 2MB',
+                'photo_pria.max' => 'Gambar Minimal Berukuran 5MB',
+                'photo_wanita.max' => 'Gambar Minimal Berukuran 5MB',
             ]);
         }
 
@@ -157,11 +157,11 @@ class PhotoController extends Controller
     public function page_upload(Request $request)
     {
         $rules = $request->validate([
-            'photo' => 'required|image|file|max:2048',
+            'photo' => 'required|image|file|max:5120',
         ],[
             'photo.required' => 'Gambar Tidak Boleh Kosong',
             'photo.image' => 'File Harus Berupa Gambar',
-            'photo.max' => 'Gambar Minimal Berukuran 2MB',
+            'photo.max' => 'Gambar Minimal Berukuran 5MB',
         ]);
         $slug = Mempelai::where('id', $request->id)->first();
 
@@ -177,6 +177,43 @@ class PhotoController extends Controller
         ];
         Photo::create($data);
         return redirect('gallery/'.$slug->slug)->with('success', 'Gambar Berhasil Ditambahkan ke Gallery');
+    }
+
+    public function page_cover($slug)
+    {
+        $mempelai = Mempelai::where('slug', $slug)->first();
+        $data = [
+            'title' => 'Cover | Gian Wedding',
+            'badge' => 'Cover Undangan',
+            'data' => $mempelai,
+            'photos' => Photo::where('mempelai_id', $mempelai->id)->orderBy('id', 'DESC')->get(),
+        ];
+
+        return view('photo.cover',$data);
+    }
+
+    public function update_cover(Request $request)
+    {
+        $rules = $request->validate([
+            'cover' => 'required|image|file|max:5120',
+        ],[
+            'cover.required' => 'Gambar Tidak Boleh Kosong',
+            'cover.image' => 'File Harus Berupa Gambar',
+            'cover.max' => 'Gambar Minimal Berukuran 5MB',
+        ]);
+        $slug = Mempelai::where('id', $request->id)->first();
+        if($request->oldImageCover == ''){
+            $rules['cover'] = $request->file('cover')->store('post-images/cover');
+            Mempelai::where('id', $request->id)->update($rules);
+
+            return redirect('cover/'.$slug->slug)->with('success', 'Cover Berhasil Ditambahkan');
+        } else {
+            Storage::delete($request->oldImageCover);
+            $rules['cover'] = $request->file('cover')->store('post-images/cover');
+            Mempelai::where('id', $request->id)->update($rules);
+
+            return redirect('cover/'.$slug->slug)->with('success', 'Cover Berhasil Diubah');
+        }
     }
 
     public function delete_photo(Request $request)

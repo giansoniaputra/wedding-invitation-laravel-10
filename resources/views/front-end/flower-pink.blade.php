@@ -472,8 +472,8 @@
                             {{-- Pesan dari pengirim --}}
                             <div class="mb-3">
                                 <label for="pesan" class="form-label">Pesan</label>
-                                <input type="text" class="form-control" id="pesan" name="pesan"
-                                    placeholder="Masukan Pesan Anda">
+                                <textarea type="text" class="form-control" id="pesan" name="pesan"
+                                    placeholder="Masukan Pesan Anda" style="height: 100px"></textarea>
                             </div>
                             <div class="mt-1 mb-3">
                                 <small class="terkirim text-success fst-italic"></small>

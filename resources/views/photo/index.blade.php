@@ -5,6 +5,7 @@
     <ol class="breadcrumb bg-dark text-white">
         <li class="breadcrumb-item active text-white" aria-current="page">Photo Mempelai</li>
         <li class="breadcrumb-item"><a href="/gallery/{{ $data->slug }}">Gallery</a></li>
+        <li class="breadcrumb-item"><a href="/cover/{{ $data->slug }}">Cover Undangan</a></li>
     </ol>
 </nav>
 <div class="card" id="data-card">

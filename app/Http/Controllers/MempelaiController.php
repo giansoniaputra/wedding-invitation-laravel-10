@@ -108,7 +108,7 @@ class MempelaiController extends Controller
             'photos' => Photo::where('mempelai_id', $mempelai->id)->orderBy('id', 'DESC')->get(),
         ];
 
-       return view('mempelai.update-data',$data);
+       return view('mempelai.edit',$data);
     }
 
     /**
@@ -322,8 +322,8 @@ class MempelaiController extends Controller
                     if($row->activation == 0){
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
                         <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
@@ -340,8 +340,8 @@ class MempelaiController extends Controller
                     }else {
                         $actionBtn = 
                         '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                        <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
                         <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
@@ -378,8 +378,8 @@ class MempelaiController extends Controller
                 return DataTables::of($data)->addColumn('action', function($row){
                     $actionBtn = 
                     '<a href="/'.$row->slug.'" target="_blank" class="btn btn-info btn-sm view-button"><i class="fas fa-eye"></i></a>
-                     <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
-                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                    <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
+                    <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                      <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
                      <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline ml-1">
                          <input type="hidden" name="_token" value="'.csrf_token().'">
