@@ -74,7 +74,10 @@
         <i id="play" data-feather="play-circle" class="text-white d-none"
             style="position: fixed; left : 10px; border-radius: 50%; bottom : 100px;  background-color:rgba(59, 72, 109, 0.8); z-index:100"></i>
         {{-- Halaman Utama Mempelai --}}
-        <section id="home" class="home">
+        <section id="home" class="home" style=" height: 100vh;
+        background-image: url('storage/{{ $mempelai->cover }}');
+        background-size: cover;
+        background-position: center;">
             <div class="container position-absolute top-50 start-50 translate-middle">
                 <div class="row">
                     <div id="judul" class="col">
@@ -89,7 +92,8 @@
                         <img src="/front-end/img/badge.png" class="img-fluid">
                     </div>
                     <div id="nama-mempelai" class="col position-absolute top-50 start-50 translate-middle pt-5">
-                        <h1 class="text-center text-white fst-bold fs-1" style="font-family: 'Dancing Script', cursive; text-shadow: 3px 2px 1px black;">
+                        <h1 class="text-center text-white fst-bold fs-1"
+                            style="font-family: 'Dancing Script', cursive; text-shadow: 3px 2px 1px black;">
                             {{ ucwords(strtolower($mempelai->nama_pria)) }}
                             <br> & <br> {{ ucwords(strtolower($mempelai->nama_wanita)) }}</h1>
                     </div>
@@ -496,8 +500,9 @@
                                             {{ $row->pengirim }} @if($row->kehadiran == 'Hadir') (<small
                                                 class="text-info"><b> Hadir </b></small>) @elseif($row->kehadiran ==
                                             'Belum Pasti') (<small class="text-warning"><b> Belum Pasti </b></small>)
-                                            @elseif($row->kehadiran == 'Tidak Bisa Hadir') (<small
-                                                class="text-danger"><b> Tidak Bisa Hadir </b></small>) @endif
+                                            <blade
+                                                elseif|(%24row-%3Ekehadiran%20%3D%3D%20%26%2339%3BTidak%20Bisa%20Hadir%26%2339%3B)%20(%3Csmall />
+                                            class="text-danger"><b> Tidak Bisa Hadir </b></small>) @endif
                                         </p>
                                     </div>
                                 </div>

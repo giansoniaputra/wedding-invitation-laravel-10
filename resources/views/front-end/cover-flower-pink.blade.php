@@ -29,7 +29,7 @@
 
     <style>
         .container-fluid {
-            background-image: url('/front-end/img/cover.png');
+            background-image: url('/storage/{{ $mempelai->cover }}');
             background-size: cover;
             background-position: center;
             height: 100vh;

@@ -127,7 +127,7 @@ class PhotoController extends Controller
             'photo_wanita' => $imageNameWanita,
         ];
 
-        if($slug->photo_pria != 'img/mempelai/' && $slug->photo_wanita != 'img/mempelai/')
+        if($slug->photo_pria != 'post-images/mempelai/' && $slug->photo_wanita != 'post-images/mempelai/')
         {
             // if(file_exists($request->photo_pria) && file_exists($request->photo_wanita)){
             //     unlink(public_path().'/img/mempelai/'.$request->oldImagePria);

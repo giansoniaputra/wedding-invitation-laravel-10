@@ -19,12 +19,6 @@
     animation: bungaBawah 2s ease-in-out infinite;
 }
 /* HOME */
-.home {
-    height: 100vh;
-    background-image: url('/front-end/img/cover.png');
-    background-size: cover;
-    background-position: center;
-}
 #judul {
     animation: topToBottom 2s ease-in-out;
 }
