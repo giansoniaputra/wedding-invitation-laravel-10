@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\KadoController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PhotoController;
@@ -53,6 +54,7 @@ Route::resource('/mempelai', MempelaiController::class)->middleware('auth');
 Route::get('/dataTablesMempelai', [MempelaiController::class, 'dataTables'])->middleware('auth');
 Route::get('/dataTablesInvited', [MempelaiController::class, 'dataTablesInvited'])->middleware('auth');
 Route::get('/dataTablesStory', [StoryController::class, 'dataTables'])->middleware('auth');
+Route::get('/dataTablesPayment', [KadoController::class, 'dataTables'])->middleware('auth');
     //Create Slug
 Route::get('/createSlug', [MempelaiController::class,'cekSlug'])->middleware('auth');
     //Update Data Mempelai
@@ -94,7 +96,14 @@ Route::get('/status/story-aktif/{mempelai:slug}', [StoryController::class,'aktif
 Route::get('/getIdStory/{story:id}', [StoryController::class, 'getIdStory'])->middleware('auth');
 Route::post('/updateStory', [StoryController::class,'update_2'])->middleware('auth');
 Route::post('/deleteStory', [StoryController::class,'delete'])->middleware('auth');
-    // MENAMPILKAN FRONT END (harus paling bawah)
+//GIFT
+Route::resource('/mempelai/{mempelai:slug}/kado', KadoController::class)->middleware('auth');
+Route::post('/addPayment', [KadoController::class, 'add_payment'])->middleware('auth');
+Route::get('/getDataPayment', [KadoController::class, 'get_payment'])->middleware('auth');
+Route::post('/updateDataPayment', [KadoController::class, 'update_payment'])->middleware('auth');
+Route::post('/deleteDataPayment', [KadoController::class, 'delete_payment'])->middleware('auth');
+
+// MENAMPILKAN FRONT END (harus paling bawah)
 Route::get('/{mempelai:slug}', [MempelaiController::class, 'front_end']);
 Route::get('/{mempelai:slug}/{anything}', [MempelaiController::class, 'name']);
 

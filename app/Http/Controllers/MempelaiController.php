@@ -325,6 +325,7 @@ class MempelaiController extends Controller
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
                         <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/kado" class="btn btn-success btn-sm ml-1"><i class="fas fa-money-bill-wave"></i></a>
                         <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
                         <input type="hidden" name="id" value="'.$row->id.'">
@@ -343,6 +344,7 @@ class MempelaiController extends Controller
                         <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
                         <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                         <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                        <a href="/mempelai/'.$row->slug.'/kado" class="btn btn-success btn-sm ml-1"><i class="fas fa-money-bill-wave"></i></a>
                         <form action="/activasi" method="post" class="d-inline ml-1">
                         <input type="hidden" name="_token" value="'.csrf_token().'">
                         <input type="hidden" name="id" value="'.$row->id.'">
@@ -381,6 +383,7 @@ class MempelaiController extends Controller
                     <a href="/mempelai/'.$row->slug.'/edit" class="btn btn-warning btn-sm edit-button ml-1"><i class="fas fa-edit"></i></a>
                     <a href="/editPhotoMempelai/'.$row->slug.'" class="btn btn-dark btn-sm view-button ml-1" style="background-color: rgb(89, 98, 117)"><i class="fas fa-images"></i></a>
                      <a href="/mempelai/'.$row->slug.'/story" class="btn btn-primary btn-sm edit-button ml-1"><i class="fas fa-heart"></i></a>
+                     <a href="/mempelai/'.$row->slug.'/kado" class="btn btn-success btn-sm ml-1"><i class="fas fa-money-bill-wave"></i></a>
                      <form action="/mempelai/'.$row->slug.'" method="post" class="d-inline ml-1">
                          <input type="hidden" name="_token" value="'.csrf_token().'">
                          <input type="hidden" name="_method" value="DELETE">
