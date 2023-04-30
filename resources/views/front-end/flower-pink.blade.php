@@ -500,9 +500,9 @@
                                             {{ $row->pengirim }} @if($row->kehadiran == 'Hadir') (<small
                                                 class="text-info"><b> Hadir </b></small>) @elseif($row->kehadiran ==
                                             'Belum Pasti') (<small class="text-warning"><b> Belum Pasti </b></small>)
-                                            <blade
-                                                elseif|(%24row-%3Ekehadiran%20%3D%3D%20%26%2339%3BTidak%20Bisa%20Hadir%26%2339%3B)%20(%3Csmall />
-                                            class="text-danger"><b> Tidak Bisa Hadir </b></small>) @endif
+                                        @elseif($row->kehadiran ==
+                                            'Tidak Bisa Hadir') (<small class="text-danger"><b> Tidak Bisa Hadir
+                                                </b></small>) @endif
                                         </p>
                                     </div>
                                 </div>
@@ -525,6 +525,34 @@
                 </div>
             </div>
         </section>
+        @if($payment->count() > 0)
+            {{-- Payment --}}
+            <section id="payment" class="mb-3 p-2">
+                <div class="container kartu" style="padding : 10px 10px;">
+                    <div class="row mb-3">
+                        <div class="col">
+                            <h1 class="h1 text-center"
+                                style="font-family: 'Times New Roman', Times, serif; color:#3B486D">
+                                Gift</h1>
+                        </div>
+                    </div>
+                    @foreach($payment as $row)
+                        <div class="row mb-3 mx-2 p-2 rounded" style="box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.2);">
+                            <div class="col-4">
+                                <img src="/img/{{ $row->jenis_pembayaran }}.png" style="width: 50px"
+                                    class="img-fluid rounded-start" alt="...">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $row->nomor }}</h5>
+                                    <p class="card-text">{{ $row->atas_nama }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section>
+        @endif
         {{-- Turut Mengundangan --}}
         <section id="mengundang" class="mb-3 p-2">
             <div class="container kartu" style="padding : 10px 10px;">

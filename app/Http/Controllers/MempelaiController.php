@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kado;
 use App\Models\Photo;
 use App\Models\Story;
 use App\Models\Ucapan;
@@ -583,6 +584,7 @@ class MempelaiController extends Controller
                 'hari' => $daftar_hari,
                 'bulan' => $daftar_bulan,
                 'stories' => Story::where('mempelai_id', $mempelai->id)->get(),
+                'payment' => Kado::where('mempelai_id', $mempelai->id)->get(),
             ];
             return view('front-end.'.$template->template, $data);
         } else {
