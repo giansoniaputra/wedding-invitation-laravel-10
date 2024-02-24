@@ -122,7 +122,7 @@
                     <div class="row mt-5">
                         <div id="nama-pria" class="col">
                             <h1 style="font-family: 'Dancing Script', cursive; color: #3B486D;" class="fs-1 fw-bold">
-                                {{ ucwords(strtolower( $mempelai->nama_pria)) }}
+                                {{ $mempelai->nama_pria }}
                             </h1>
                         </div>
                     </div>
@@ -138,7 +138,7 @@
                     <div class="row">
                         <div id="nama-wanita" class="col">
                             <h1 style="font-family: 'Dancing Script', cursive; color: #3B486D;" class="fs-1 fw-bold">
-                                {{ ucwords(strtolower( $mempelai->nama_wanita)) }}</h1>
+                                {{ $mempelai->nama_wanita}}</h1>
                         </div>
                     </div>
                     <div class="row pb-5">
