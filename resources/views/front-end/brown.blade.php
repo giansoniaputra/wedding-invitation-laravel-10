@@ -6,7 +6,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="stylesheet" href="/front-end/css/flower-pink/style2.css">
+    <link rel="stylesheet" href="/front-end/css/brown/style2.css">
 
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
@@ -23,6 +23,9 @@
     <!-- Dencing -->
     <!-- font-family: 'Dancing Script', cursive; -->
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Carattere&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Diphylleia&display=swap" rel="stylesheet">
     <!-- Feather Icon -->
     <script src="https://unpkg.com/feather-icons"></script>
 
@@ -31,7 +34,7 @@
 <body class="bodyku">
     {{-- NavBar --}}
     <header>
-        <nav class="navbar rounded fixed-bottom mx-1 mb-1" style="background-color:rgba(59, 72, 109, 0.8)">
+        <nav class="navbar rounded fixed-bottom mx-1 mb-1" style="background-color:rgba(83,40,12,1)">
             <div class="container">
                 <a class="btn btn-outline-light rounded py-1 px-2" href="#"><i data-feather="home" style="width:17px"></i></a>
                 <a class="btn btn-outline-light rounded py-1 px-2" href="#mempelai"><i data-feather="book-open" style="width:17px"></i></a>
@@ -58,29 +61,19 @@
         </div>
     </section>
     <main>
-        <i id="pause" data-feather="pause-circle" class="text-white" style="position: fixed; left : 10px; border-radius: 50%; bottom : 100px;  background-color:rgba(59, 72, 109, 0.8); z-index:100"></i>
-        <i id="play" data-feather="play-circle" class="text-white d-none" style="position: fixed; left : 10px; border-radius: 50%; bottom : 100px;  background-color:rgba(59, 72, 109, 0.8); z-index:100"></i>
+        <i id="pause" data-feather="pause-circle" class="text-white" style="position: fixed; left : 10px; border-radius: 50%; bottom : 100px;  background-color:rgba(144,70,23, 0.8); z-index:100"></i>
+        <i id="play" data-feather="play-circle" class="text-white d-none" style="position: fixed; left : 10px; border-radius: 50%; bottom : 100px;  background-color:rgba(144,70,23, 0.8); z-index:100"></i>
         {{-- Halaman Utama Mempelai --}}
-        <section id="home" class="home" style=" height: 100vh;
-        background-image: url('storage/{{ $mempelai->cover }}');
-        background-size: cover;
-        background-position: center;">
-            <div class="container position-absolute top-50 start-50 translate-middle">
+        <section id="home" class="home" style=" height: 100vh; background-image: url('storage/{{ $mempelai->cover }}');background-position: center;">
+            <div class="container position-absolute bottom-0 start-50 translate-middle-x">
                 <div class="row">
-                    <div id="judul" class="col">
-                        <h2 class="fw-bold text-center" style="font-family: 'Pacifico', cursive; color: white; font-size : 5vmax; text-shadow: 3px 2px 1px black;">
-                            The Wedding
-                        </h2>
-                    </div>
-                </div>
-                <div class="row">
-                    <div id="bunga" class="col d-flex justify-content-center align-items-center">
-                        <img src="/front-end/img/badge.png" class="img-fluid">
-                    </div>
-                    <div id="nama-mempelai" class="col position-absolute top-50 start-50 translate-middle pt-5">
-                        <h1 class="text-center text-white fst-bold fs-1" style="font-family: 'Dancing Script', cursive; text-shadow: 3px 2px 1px black;">
-                            {{ $mempelai->nama_pria }}
-                            <br> & <br> {{ $mempelai->nama_wanita }}</h1>
+                    <div class="col-sm-12" style="padding:0">
+                        <div class="gradient-box">
+                            <h1 style="color:rgba(83,40,12,0.8); padding-top:15vh;font-family: 'Bebas Neue', sans-serif" class="text-center">The Wedding Of</h1>
+                            <h1 class="text-center text-white fst-bold" style="font-family: 'Carattere', cursive; font-size: 4em; color:rgba(83,40,12,0.8);">
+                                {{ ucwords(strtolower($nama_laki)) }} & {{ ucwords(strtolower($nama_cewe)) }}</h1>
+                            <h1 style="color:rgba(83,40,12,0.8);font-family: 'Bebas Neue';" class="text-center">{{ tanggal_hari($mempelai->tanggal_akad) }}</h1>
+                        </div>
                     </div>
                 </div>
             </div>
