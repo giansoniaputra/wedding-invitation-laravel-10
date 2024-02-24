@@ -325,7 +325,7 @@
                     <div id="pukul-r" class="row mt-2">
                         {{-- Waktu resepsi --}}
                         <div class="col-12">
-                            <h6 class="text-center" style="font-size: 0.8em;">Pukul <span id="waktu_res"></span> -
+                            <h6 class="text-center" style="font-size: 0.8em;">Pukul <span id="waktu_res">{{ $mempelai->waktu_resepsi }}</span> -
                                 Selesai</h6>
                         </div>
                         {{-- Alamat Resepsi --}}
@@ -333,8 +333,7 @@
                             <h6 class="text-center">Alamat:</h6>
                         </div>
                         <div class="col-12">
-                            <h6 class="text-center" style="font-size: 0.8em;">M5W6+HVG, Jalan, Bungursari, Tasikmalaya
-                                Regency, West Java 46151</h6>
+                            <h6 class="text-center" style="font-size: 0.8em;">{{ $mempelai->alamat_resepsi }}</h6>
                         </div>
                     </div>
                     <div id="maps-r" class="row" style="padding-bottom:70px">
