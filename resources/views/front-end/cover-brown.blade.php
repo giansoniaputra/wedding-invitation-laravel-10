@@ -41,6 +41,7 @@
         a:visited {
             color: white;
         }
+
     </style>
 
 </head>
@@ -65,7 +66,7 @@
             </div>
             <div class="row" style="margin-top:26vh; font-size:0.8em">
                 <div class="col d-flex justify-content-center align-items-center">
-                    <p class="p-0 fst-italic text-white" style="text-shadow: 3px 2px 1px black;">Turut Mengundang Bapak/Ibu/Saudara/i</p>
+                    <p class="p-0 fst-italic text-white" style="text-shadow: 3px 2px 1px black;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
                 </div>
             </div>
             <div class="row">
@@ -89,6 +90,7 @@
 
     <script>
         feather.replace()
+
     </script>
     <script src="/js/page-script/front-end.js"></script>
     <!-- Countdown -->
