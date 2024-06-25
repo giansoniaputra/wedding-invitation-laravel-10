@@ -566,7 +566,7 @@
                     <h1 class="text-center fs-5 text-white">❣ Gian Production</h1>
                     <div class="row">
                         <div class="col mb-2 d-flex justify-content-center align-items-center">
-                            <img src="/front-end/img/icon/wa.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white"><a href="https://wa.me/6282321634181" target="_black"></a>082321634181</span>
+                            <img src="/front-end/img/icon/wa.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white"><a href="https://wa.me/6282321634181" target="_black">082321634181</a></span>
                         </div>
                         <div class="col mb-2 d-flex justify-content-center align-items-center">
                             <img src="/front-end/img/icon/gmail.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansonia555@gmail.com</span>
