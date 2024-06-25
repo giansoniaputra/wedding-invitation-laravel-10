@@ -566,13 +566,13 @@
                     <h1 class="text-center fs-5 text-white">❣ Gian Production</h1>
                     <div class="row">
                         <div class="col mb-2 d-flex justify-content-center align-items-center">
-                            <img src="/front-end/img/icon/wa.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">082321634181</span>
+                            <img src="/front-end/img/icon/wa.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white"><a href="https://wa.me/6282321634181" target="_black"></a>082321634181</span>
                         </div>
                         <div class="col mb-2 d-flex justify-content-center align-items-center">
                             <img src="/front-end/img/icon/gmail.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansonia555@gmail.com</span>
                         </div>
                         <div class="co mb-2l d-flex justify-content-center align-items-center">
-                            <a href="https://www.instagram.com/giansonia.io"></a><img src="/front-end/img/icon/ig.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansoniaputra</span></a>
+                            <a href="https://www.instagram.com/giansonia.io" target="_black"><img src="/front-end/img/icon/ig.png" alt="img-thumbnail" width="25px"><span class="ms-2 text-white">giansoniaputra</span></a>
                         </div>
                     </div>
                 </div>
