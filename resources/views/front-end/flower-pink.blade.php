@@ -510,7 +510,7 @@
         </section>
         @endif
         {{-- Turut Mengundangan --}}
-        @if(($invited->count() < 1))
+        @if(count($invited) > 0)
         <section id="mengundang" class="mb-3 p-2">
             <div class="container kartu" style="padding : 10px 10px;">
                 <div class="row mb-3">
