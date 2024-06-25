@@ -510,6 +510,7 @@
         </section>
         @endif
         {{-- Turut Mengundangan --}}
+        @if(count($invited) < 1)
         <section id="mengundang" class="mb-3 p-2">
             <div class="container kartu" style="padding : 10px 10px;">
                 <div class="row mb-3">
@@ -526,7 +527,8 @@
                 </div>
             </div>
         </section>
-        <section id="protokol" class="mb-3 p-2">
+        @endif
+        <!-- <section id="protokol" class="mb-3 p-2">
             <div class="container kartu" style="padding : 10px 10px;">
                 <div class="row mb-3">
                     <div class="col">
@@ -553,7 +555,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </main>
     {{-- Footer --}}
     <audio id="audio" src="/music/ATY.mp3" autoplay></audio>
