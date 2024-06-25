@@ -586,7 +586,6 @@ class MempelaiController extends Controller
                 'nama_laki' => $nama_laki[0],
                 'nama_cewe' => $nama_cewe[0],
             ];
-            return count($data['invited']);
             return view('front-end.' . $template->template, $data);
         } else {
             return view('not-activeted');
