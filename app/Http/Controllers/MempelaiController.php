@@ -106,7 +106,7 @@ class MempelaiController extends Controller
             'invited' => Invited::where('mempelai_id', $mempelai->id)->get(),
             'photos' => Photo::where('mempelai_id', $mempelai->id)->orderBy('id', 'DESC')->get(),
         ];
-
+        return count($data['invited']);
         return view('mempelai.edit', $data);
     }
 
