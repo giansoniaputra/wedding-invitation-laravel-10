@@ -389,6 +389,7 @@
         </section>
         @endif
         {{-- Gallery --}}
+        @if(count($photos) > 1)
         <section id="gallery" class="mb-3 p-2">
             <div class="container-fluid kartu" style="padding : 10px 10px;">
                 <div class="row mb-3">
@@ -411,6 +412,7 @@
                     @endforeach
                 </div>
         </section>
+        @endif
         {{-- Ucapan kepada mempelai --}}
         <section id="doa" class="mb-3 p-2">
             {{-- Judul Ucapan --}}
