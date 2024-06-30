@@ -100,7 +100,7 @@
                 <!-- Pembukaan -->
                 <div class="row">
                     <div id="pembukaan" class="col">
-                        <p class="text-center mb-5 mx-1 tulisan fs-6" style="font-family: 'Times New Roman', Times, serif;">Dengan rasa syukur kepada Tuhan Yang Maha Esa Kami {{ $mempelai->nama_wanita }} dan {{ $mempelai->nama_pria }}, Bersama dengan keluarga kami dedengan tulus mengundang Anda untuk hadir dalam momen bersejarah dalam hidup kami. pernikahan kami akan menjadi saksi perpaduan dua jiwa, dua hari, yang telah kami impikan selama ini.</p>
+                        <p class="text-center mb-5 mx-1 tulisan fs-6" style="font-family: 'Times New Roman', Times, serif;">Dengan rasa syukur kepada Tuhan Yang Maha Esa Kami {{ $mempelai->nama_wanita }} dan {{ $mempelai->nama_pria }}, Bersama dengan keluarga kami dengan tulus mengundang Anda untuk hadir dalam momen bersejarah dalam hidup kami. Pernikahan kami akan menjadi saksi perpaduan dua jiwa, dua hari, yang telah kami impikan selama ini.</p>
                     </div>
                 </div>
                 <!-- Gambar -->
